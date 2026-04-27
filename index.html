@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intern Counter SOP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+
+
+/* ─── VARIABLES ─── */
+:root {
+  --navy: #1a3a6b;
+  --blue: #1e4db7;
+  --blue-mid: #2559d4;
+  --blue-light: #3a72f5;
+  --accent: #4f8cff;
+  --bg: #dce8f7;
+  --bg-light: #eaf2fb;
+  --white: #ffffff;
+  --grey: #b0bec5;
+  --grey-light: #cfd8e3;
+  --text-dark: #0d1f3c;
+  --text-mid: #3a5080;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --border: rgba(255, 255, 255, 0.18);
+}
+
+/* ─── RESET ─── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── BASE ─── */
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  color: var(--text-dark);
+}
+
+/* ─── LAYOUT ─── */
+.app {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  min-height: 100vh;
+}
+
+/* ─── HEADER ─── */
+.header-title {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 16px 24px;
+  border-radius: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 18px rgba(30, 77, 183, 0.25);
+  margin-bottom: 20px;
+}
+
+/* ─── NAV TABS ─── */
+.nav-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.nav-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.nav-tabs::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+.tab-btn {
+  flex: 1 0 auto;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(30, 77, 183, 0.13);
+}
+
+.tab-btn:hover {
+  background: var(--blue-light);
+  transform: translateY(-1px);
+}
+
+.tab-btn.active {
+  background: var(--navy);
+  box-shadow: 0 4px 14px rgba(26, 58, 107, 0.3);
+  transform: translateY(-2px);
+}
+
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── SECTION CARD ─── */
+.card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 14px rgba(30, 77, 183, 0.08);
+}
+
+.card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--bg);
+}
+
+/* ─── HOME PAGE ─── */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.home-cell {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+  border-radius: 10px;
+  padding: 18px 12px 14px;
+  color: var(--white);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 3px 12px rgba(30, 77, 183, 0.18);
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.home-cell:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(30, 77, 183, 0.28);
+}
+
+.home-cell.header-cell {
+  background: var(--navy);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  min-height: 44px;
+  padding: 10px 8px;
+  cursor: default;
+}
+
+.home-cell.header-cell:hover {
+  transform: none;
+}
+
+.home-cell .cell-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  opacity: 0.85;
+}
+
+.home-cell input[type="text"] {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  color: var(--white);
+  font-size: 13px;
+  padding: 5px 8px;
+  outline: none;
+  text-align: center;
+}
+
+.home-cell input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ─── GANTT PAGE ─── */
+.gantt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.gantt-cell {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+  border-radius: 10px;
+  padding: 16px 12px;
+  color: var(--white);
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gantt-cell.hdr {
+  background: var(--navy);
+  min-height: 44px;
+  padding: 10px 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.gantt-cell label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  opacity: 0.8;
+}
+
+.gantt-cell input[type="text"],
+.gantt-cell input[type="date"] {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  color: var(--white);
+  font-size: 12px;
+  padding: 5px 8px;
+  outline: none;
+}
+
+.gantt-cell input[type="text"]::placeholder,
+.gantt-cell input[type="date"]::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.gantt-cell input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.7;
+}
+
+/* ─── CHECKLIST ─── */
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--bg-light);
+  margin-bottom: 8px;
+  transition: background 0.15s;
+}
+
+.checklist-item:hover {
+  background: #d5e5f5;
+}
+
+.checklist-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-dark);
+  flex: 1;
+}
+
+.yn-select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid var(--grey-light);
+  border-radius: 8px;
+  padding: 6px 32px 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Barlow', sans-serif;
+  cursor: pointer;
+  outline: none;
+  background-color: var(--bg-light);
+  color: var(--text-mid);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233a5080' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+  min-width: 100px;
+}
+
+.yn-select:focus {
+  border-color: var(--accent);
+}
+
+.yn-select.selected-yes {
+  background-color: #eafaf1;
+  border-color: var(--green);
+  color: var(--green);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2327ae60' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.yn-select.selected-no {
+  background-color: #fdf0ee;
+  border-color: var(--red);
+  color: var(--red);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e74c3c' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* ─── NUMBER INPUT IN CHECKLIST ─── */
+.checklist-item input[type="number"] {
+  width: 80px;
+  border: 1px solid var(--grey-light);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  background: var(--bg-light);
+  color: var(--navy);
+}
+
+/* ─── INSTRUCTION BOX ─── */
+.instruction-box {
+  background: #fff3cd;
+  border-left: 4px solid #f0a500;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #7a4f00;
+}
+
+/* ─── D-DAY TASKS ─── */
+.task-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bg-light);
+  margin-bottom: 10px;
+  transition: background 0.15s;
+}
+
+.task-step.done {
+  background: #eafaf1;
+}
+
+.step-num {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.task-step.done .step-num {
+  background: var(--green);
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text-dark);
+}
+
+.step-sub {
+  font-size: 12px;
+  color: var(--text-mid);
+  margin-top: 2px;
+}
+
+.step-check {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--blue);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* ─── DUTIES GRID ─── */
+.duties-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.duty-cell {
+  background: var(--blue);
+  border-radius: 8px;
+  padding: 10px 10px 8px;
+  color: white;
+}
+
+.duty-cell label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  opacity: 0.8;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.duty-cell input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 5px;
+  color: white;
+  font-size: 13px;
+  padding: 5px 8px;
+  outline: none;
+}
+
+.duty-cell input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ─── STOCK COUNT ─── */
+.stock-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.stock-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-light);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.stock-input-wrap label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+}
+
+.stock-input-wrap input {
+  width: 60px;
+  border: 1px solid var(--grey-light);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  color: var(--navy);
+}
+
+.stock-hint {
+  font-size: 11px;
+  color: var(--text-mid);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+.stock-sections {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stock-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-mid);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.stock-plus {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+/* ─── GROUP LINK ─── */
+.link-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.link-row input {
+  flex: 1;
+  border: 1px solid var(--grey-light);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 14px;
+  outline: none;
+  color: var(--text-dark);
+  min-width: 160px;
+}
+
+/* ─── BUTTONS ─── */
+.btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+  font-family: 'Barlow', sans-serif;
+}
+
+.btn:hover {
+  background: var(--navy);
+}
+
+.btn.green {
+  background: var(--green);
+}
+
+.btn.green:hover {
+  background: #1e8449;
+}
+
+/* ─── TIMESTAMP DISPLAY ─── */
+.timestamp-display {
+  background: var(--bg-light);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-mid);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.ts-value {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* ─── AFTER SALES ─── */
+.sales-report {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.report-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.report-field input {
+  width: 100%;
+  border: 1px solid var(--grey-light);
+  border-radius: 7px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: var(--text-dark);
+  outline: none;
+  background: var(--bg-light);
+  font-family: 'Barlow', sans-serif;
+}
+
+.report-field input:focus {
+  border-color: var(--accent);
+  background: white;
+}
+
+/* ─── PAGE DOTS ─── */
+.page-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.dot {
+  width: 36px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--grey-light);
+  transition: background 0.2s, width 0.2s;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: var(--blue);
+  width: 52px;
+}
+
+/* ─── UTILITY ─── */
+.mt-4 { margin-top: 4px; }
+.mt-10 { margin-top: 10px; }
+.mb-10 { margin-bottom: 10px; }
+.mb-6 { margin-bottom: 6px; }
+.text-blue { color: var(--blue); }
+
+/* ─── RESPONSIVE — Tablet ─── */
+@media (max-width: 700px) {
+  .app {
+    padding: 16px 12px 40px;
+  }
+
+  .header-title {
+    font-size: 20px;
+    padding: 14px 16px;
+  }
+
+  .home-grid,
+  .gantt-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sales-report {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .duties-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tab-btn {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+}
+
+/* ─── RESPONSIVE — Mobile ─── */
+@media (max-width: 480px) {
+  .app {
+    padding: 12px 10px 32px;
+  }
+
+  .header-title {
+    font-size: 17px;
+    padding: 12px 12px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-tabs {
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+
+  .tab-btn {
+    font-size: 10px;
+    padding: 7px 8px;
+    border-radius: 8px;
+  }
+
+  .card {
+    padding: 14px 14px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  /* Home & Gantt: full single column on mobile */
+  .home-grid,
+  .gantt-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .home-cell {
+    min-height: 70px;
+    padding: 12px 8px 10px;
+    font-size: 10px;
+  }
+
+  .home-cell .cell-label {
+    font-size: 10px;
+  }
+
+  .home-cell input[type="text"] {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+
+  .gantt-cell {
+    padding: 10px 8px;
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .gantt-cell.hdr {
+    font-size: 10px;
+    min-height: 38px;
+    padding: 8px;
+  }
+
+  .gantt-cell input[type="text"],
+  .gantt-cell input[type="date"] {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+
+  /* Duties: 1 column on very small screens */
+  .duties-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Sales report: 1 column */
+  .sales-report {
+    grid-template-columns: 1fr;
+  }
+
+  .checklist-label {
+    font-size: 13px;
+  }
+
+  .yn-select {
+    font-size: 12px;
+    padding: 5px 28px 5px 10px;
+    min-width: 80px;
+  }
+
+  .checklist-item {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+
+  .link-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .link-row input {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+    padding: 10px 12px;
+  }
+
+  .stock-sections {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stock-row {
+    gap: 8px;
+  }
+
+  .stock-input-wrap {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .task-step {
+    padding: 10px 10px;
+    gap: 10px;
+  }
+
+  .step-title {
+    font-size: 13px;
+  }
+
+  .step-sub {
+    font-size: 11px;
+  }
+
+  .page-dots {
+    margin-top: 20px;
+  }
+
+  .dot {
+    width: 28px;
+    height: 8px;
+  }
+
+  .dot.active {
+    width: 42px;
+  }
+}
+
+
+
+/* ─── PAGES ─── */
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.25s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tab-btn.active {
+  background: var(--navy);
+  box-shadow: 0 4px 14px rgba(26,58,107,0.3);
+  transform: translateY(-2px);
+}
+
+  
+/* ─── PAGES ─── */
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tab-btn.active {
+  background: var(--navy) !important;
+  box-shadow: 0 4px 14px rgba(26,58,107,0.3);
+  transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+
+
+
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header-title">Intern Counter SOP</div>
+
+  <!-- NAV TABS (CSS-only tab switching using :target) -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showPage('page-home')">Home</button>
+    <button class="tab-btn" onclick="showPage('page-gantt')">Gantt Chart</button>
+    <button class="tab-btn" onclick="showPage('page-warehouse')">Warehouse</button>
+    <button class="tab-btn" onclick="showPage('page-t1')">Items to Carry</button>
+    <button class="tab-btn" onclick="showPage('page-dday')">D-Day</button>
+    <button class="tab-btn" onclick="showPage('page-aftersales')">After Sales</button>
+  </div>
+
+  <!-- ════════════════════════ HOME ════════════════════════ -->
+  <div class="page active" id="page-home">
+    <div class="card">
+      <div class="card-title">Counter Details</div>
+      <div class="home-grid">
+        <!-- Header row -->
+        <!-- <div class="home-cell header-cell">A/C Manager Name</div>
+        <div class="home-cell header-cell">Counter Name</div>
+        <div class="home-cell header-cell">School Code</div> -->
+
+
+        <div class="home-cell" style="background:var(--blue-mid);">
+          <div class="cell-label">A/C Manager Name</div>
+          <input type="text" placeholder="Enter name…" />
+        </div>
+        <div class="home-cell" style="background:var(--blue-mid);">
+          <div class="cell-label">Counter Name</div>
+          <input type="text" placeholder="Enter counter…" />
+        </div>
+        <div class="home-cell" style="background:var(--blue-mid);">
+          <div class="cell-label">School Code</div>
+          <input type="text" placeholder="SCH-001" />
+        </div>
+
+
+        <!-- Input row 2 -->
+        <!-- <div class="home-cell" style="background:var(--blue-mid);">
+          <div class="cell-label">Name</div>
+          <input type="text" placeholder="Enter name…" />
+        </div>
+        <div class="home-cell" style="background:var(--blue-mid);">
+          <div class="cell-label">Counter</div>
+          <input type="text" placeholder="Enter counter…" />
+        </div>
+        <div class="home-cell" style="background:var(--blue-mid);">
+          <div class="cell-label">Code</div>
+          <input type="text" placeholder="SCH-001" />
+        </div> -->
+        <!-- Input Row 3 -->
+        <div class="home-cell" style="background:var(--blue);">
+          <div class="cell-label">Emailer Link</div>
+          <input type="text" placeholder="Paste link…" />
+        </div>
+        <div class="home-cell" style="background:var(--blue);">
+          <div class="cell-label">Venue Location</div>
+          <input type="text" placeholder="Location…" />
+        </div>
+        <div class="home-cell" style="background:var(--blue);">
+          <div class="cell-label">Counter Timing</div>
+          <input type="text" placeholder="9AM – 5PM" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Nav -->
+    <div class="card">
+      <div class="card-title">Quick Navigation</div>
+      <div class="home-grid">
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage(\'page-gantt\')" style="text-decoration:none;">
+          <span style="font-size:22px;">📅</span>
+          <span class="cell-label">Gantt Chart</span>
+        </a>
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage(\'page-warehouse\')" style="text-decoration:none;">
+          <span style="font-size:22px;">🏭</span>
+          <span class="cell-label">Warehouse</span>
+        </a>
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage(\'page-t1\')" style="text-decoration:none;">
+          <span style="font-size:22px;">🎒</span>
+          <span class="cell-label">Items to Carry</span>
+        </a>
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage(\'page-dday\')" style="text-decoration:none;">
+          <span style="font-size:22px;">📍</span>
+          <span class="cell-label">D-Day Tasks</span>
+        </a>
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage(\'page-aftersales\')" style="text-decoration:none;">
+          <span style="font-size:22px;">📊</span>
+          <span class="cell-label">After Sales</span>
+        </a>
+        <div class="home-cell" style="background:#1a5276;cursor:default;">
+          <span style="font-size:22px;">✅</span>
+          <span class="cell-label">T-2 / T-1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════ GANTT CHART ════════════════════════ -->
+  <div class="page" id="page-gantt">
+    <div class="card">
+      <div class="card-title">Gantt Chart Details</div>
+      <div class="gantt-grid">
+        <!-- Row 1 headers -->
+        <!-- <div class="gantt-cell hdr">Product Details</div>
+        <div class="gantt-cell hdr">Contact Details of School POC</div>
+        <div class="gantt-cell hdr">Account Manager Number</div> -->
+        <!-- Row 1 data -->
+        <div class="gantt-cell">
+          <label>Product Details</label>
+          <input type="text" placeholder="e.g. School Kit A" />
+          <label>SKU</label>
+          <input type="text" placeholder="SKU-0001" />
+        </div>
+        <div class="gantt-cell">
+          <label>School POC Contact</label>
+          <input type="text" placeholder="Contact person" />
+          <label>Phone</label>
+          <input type="text" placeholder="+91 XXXXX XXXXX" />
+        </div>
+        <div class="gantt-cell">
+          <label>A/C Manager</label>
+          <input type="text" placeholder="Manager name" />
+          <label>Number</label>
+          <input type="text" placeholder="+91 XXXXX XXXXX" />
+        </div>
+        <!-- Row 2 headers -->
+        <!-- <div class="gantt-cell hdr">Emailer Link</div>
+        <div class="gantt-cell hdr">Venue Location</div>
+        <div class="gantt-cell hdr">School Code</div> -->
+        <!-- Row 2 data -->
+        <div class="gantt-cell">
+          <label>Emailer Link</label>
+          <input type="text" placeholder="https://..." />
+        </div>
+        <div class="gantt-cell">
+          <label>Counter Address</label>
+          <input type="text" placeholder="School address" />
+        </div>
+        <div class="gantt-cell">
+          <label>School Code</label>
+          <input type="text" placeholder="SCH-001" />
+        </div>
+        <!-- Row 3 headers -->
+        <!-- <div class="gantt-cell hdr">Counter Timing</div>
+        <div class="gantt-cell hdr">Important Dates</div>
+        <div class="gantt-cell hdr">Delivery Timeline</div> -->
+        <!-- Row 3 data -->
+        <div class="gantt-cell">
+          <label>Opening Time</label>
+          <input type="text" placeholder="9:00 AM" />
+          <label>Closing Time</label>
+          <input type="text" placeholder="5:00 PM" />
+        </div>
+        <div class="gantt-cell">
+          <label>Important Dates</label>
+          <input type="date" />
+          <!-- <label>D-Day Date</label>
+          <input type="date" /> -->
+        </div>
+        <div class="gantt-cell">
+          <label>Delivery Timeline</label>
+          <input type="text" />
+          <!-- <label>Expected Delivery</label>
+          <input type="date" /> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════ WAREHOUSE ════════════════════════ -->
+  <div class="page" id="page-warehouse">
+    <div class="card">
+      <div class="card-title">Warehouse Checklist</div>
+      <div class="instruction-box">
+        ⚠️ IMPORTANT: Check with the DC (invoice). If qty mismatch — report to <strong>JAGAN</strong> immediately.
+      </div>
+
+      <div class="checklist-item">
+        <span class="checklist-label">Packaging Slip</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Number of Boxes</span>
+        <input type="number" placeholder="0" min="0" />
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Sizing Scale</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Carry Bag</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Size &amp; Color Wise Qty</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Standee</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════ T-1 ITEMS TO CARRY ════════════════════════ -->
+  <div class="page" id="page-t1">
+    <div class="card">
+      <div class="card-title">Items to Carry — Checklist</div>
+
+      <div class="checklist-item">
+        <span class="checklist-label">Order Form</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Attendance Sheet</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Marker</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Tape</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Cutter</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Stapler</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">A4 Pages</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">POS Machine with Charger</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Emailer Color Printout</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">POS Rolls</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Billbook &amp; Carbon Paper</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════ D-DAY ════════════════════════ -->
+  <div class="page" id="page-dday">
+
+    <!-- Group Link -->
+    <div class="card">
+      <div class="card-title">🔗 Share Your Location</div>
+      <div class="link-row">
+        <!-- <input type="text" id="group-link" placeholder="Paste group link here…" /> -->
+        
+      <a class="btn green" href="https://wa.me" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;margin-top:4px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.057 23.428a.75.75 0 0 0 .921.921l5.569-1.475A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.694 9.694 0 0 1-4.945-1.355l-.355-.212-3.668.971.979-3.58-.231-.368A9.713 9.713 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+        Location and Queries 
+      </a>
+      <!-- <div class="timestamp-display" style="margin-top:10px;">
+        📸 Timestamp selfie: <span class="ts-value">Log manually in group</span>
+      </div> -->
+    </div>
+
+    <!-- Task Steps -->
+    <div class="card">
+      <div class="card-title">D-Day Task Steps</div>
+
+      <div class="task-step" id="step-1">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Share Live Location</div>
+          <div class="step-sub">Share via group link</div>
+        </div>
+        <input type="checkbox" class="step-check" />
+      </div>
+
+      <div class="task-step" id="step-2">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Update on Reaching School</div>
+          <div class="step-sub">Timestamp + selfie in group</div>
+        </div>
+        <input type="checkbox" class="step-check" />
+      </div>
+
+      <div class="task-step" id="step-3">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Count &amp; Update Opening Stock</div>
+          <div class="step-sub">Use 9+12 style counting</div>
+        </div>
+        <input type="text" placeholder="Type openinig Stock" />
+      </div>
+
+      <div class="task-step" id="step-4">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Test POS Machine</div>
+          <div class="step-sub">Use "TEST" order to verify</div>
+        </div>
+        <input type="checkbox" class="step-check" />
+      </div>
+
+      <div class="task-step" id="step-5">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Segregate Duties</div>
+          <div class="step-sub">Assign: Sizing / Billing / Delivery</div>
+        </div>
+        <input type="checkbox" class="step-check" />
+      </div>
+
+      <div class="task-step" id="step-6">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-title">Count &amp; Update Closing Stock</div>
+          <div class="step-sub">Use 9+12 style counting</div>
+        </div>
+        <input type="text" placeholder="Type Closing Stock" />
+      </div>
+
+      <div class="task-step" id="step-7">
+        <div class="step-num">7</div>
+        <div class="step-content">
+          <div class="step-title">Return to Office &amp; Prepare Sales Report</div>
+          <div class="step-sub">Submit report before leaving</div>
+        </div>
+        <input type="checkbox" class="step-check" />
+      </div>
+    </div>
+
+    <!-- Segregate Duties -->
+    <div class="card">
+      <div class="card-title">5. Segregate Duties</div>
+      <div class="duties-grid">
+        <div class="duty-cell">
+          <label>Sizing</label>
+          <input type="text" placeholder="Name…" />
+        </div>
+        <div class="duty-cell">
+          <label>Billing</label>
+          <input type="text" placeholder="Name…" />
+        </div>
+        <div class="duty-cell">
+          <label>Delivery</label>
+          <input type="text" placeholder="Name…" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Stock Count -->
+    <!-- <div class="card">
+      <div class="card-title">3 &amp; 6. Stock Count</div>
+      <div class="sales-report" style="margin-bottom:0;">
+        <div class="report-field">
+          <label>Opening Stock (units)</label>
+          <input type="number" placeholder="0" min="0" />
+        </div>
+        <div class="report-field">
+          <label>Closing Stock (units)</label>
+          <input type="number" placeholder="0" min="0" />
+        </div>
+      </div>
+    </div> -->
+
+
+  </div>
+
+  <!-- ════════════════════════ AFTER SALES ════════════════════════ -->
+  <div class="page" id="page-aftersales">
+    <div class="card">
+      <div class="card-title">7. Sales Report</div>
+      <div class="sales-report">
+        <div class="report-field">
+          <label>Counter Name</label>
+          <input type="text" placeholder="Counter name" />
+        </div>
+        <div class="report-field">
+          <label>Date</label>
+          <input type="date" />
+        </div>
+        <div class="report-field">
+          <label>Opening Stock</label>
+          <input type="number" placeholder="0" />
+        </div>
+        <div class="report-field">
+          <label>Closing Stock</label>
+          <input type="number" placeholder="0" />
+        </div>
+        <div class="report-field">
+          <label>Units Sold</label>
+          <input type="number" placeholder="0" />
+        </div>
+        <div class="report-field">
+          <label>Total Revenue (₹)</label>
+          <input type="number" placeholder="0" />
+        </div>
+        <div class="report-field">
+          <label>A/C Manager</label>
+          <input type="text" placeholder="Name" />
+        </div>
+        <div class="report-field">
+          <label>Prepared By</label>
+          <input type="text" placeholder="Intern name" />
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">8. Stationary Update</div>
+      <div class="instruction-box">⚠️ Update stationary status after returning to office.</div>
+
+      <div class="checklist-item">
+        <span class="checklist-label">Order Form</span>
+        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Attendance Sheet</span>
+        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Marker</span>
+        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Tape</span>
+        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Cutter</span>
+        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Stapler</span>
+        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">A4 Pages</span>
+        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">POS Rolls</span>
+        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Billbook</span>
+        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Return Checklist</div>
+      <div class="checklist-item">
+        <span class="checklist-label">Returned to office</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Sales report prepared &amp; submitted</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-label">Stationary updated</span>
+        <select class="yn-select">
+          <option value="">— Select —</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Dots (decorative only, no JS) -->
+  <div class="page-dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+</div>
+
+
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  var tabs = document.querySelectorAll('.tab-btn');
+  var pages = ['page-home','page-gantt','page-warehouse','page-t1','page-dday','page-aftersales'];
+  var idx = pages.indexOf(id);
+  if (tabs[idx]) tabs[idx].classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  var pages = ['page-home','page-gantt','page-warehouse','page-t1','page-dday','page-aftersales'];
+  var tabs = document.querySelectorAll('.tab-btn');
+  var idx = pages.indexOf(id);
+  if (tabs[idx]) tabs[idx].classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Intern Counter SOP</title>
+  <title>Intern Counter 3.5</title>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
 
@@ -116,10 +116,9 @@ body {
 }
 
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ─── SECTION CARD ─── */
@@ -889,12 +888,12 @@ body {
 
   <!-- NAV TABS (CSS-only tab switching using :target) -->
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="showPage('page-home')">Home</button>
-    <button class="tab-btn" onclick="showPage('page-gantt')">Gantt Chart</button>
-    <button class="tab-btn" onclick="showPage('page-warehouse')">Warehouse</button>
-    <button class="tab-btn" onclick="showPage('page-t1')">Items to Carry</button>
-    <button class="tab-btn" onclick="showPage('page-dday')">D-Day</button>
-    <button class="tab-btn" onclick="showPage('page-aftersales')">After Sales</button>
+    <button class="tab-btn" onclick="showPage('page-home', this)">Home</button>
+<button class="tab-btn" onclick="showPage('page-gantt', this)">Gantt Chart</button>
+<button class="tab-btn" onclick="showPage('page-warehouse', this)">Warehouse</button>
+<button class="tab-btn" onclick="showPage('page-t1', this)">Items to Carry</button>
+<button class="tab-btn" onclick="showPage('page-dday', this)">D-Day</button>
+<button class="tab-btn" onclick="showPage('page-aftersales', this)">After Sales</button>
   </div>
 
   <!-- ════════════════════════ HOME ════════════════════════ -->
@@ -955,23 +954,23 @@ body {
     <div class="card">
       <div class="card-title">Quick Navigation</div>
       <div class="home-grid">
-        <a class="home-cell" href="javascript:void(0)" onclick="showPage(\'page-gantt\')" style="text-decoration:none;">
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-gantt')" style="text-decoration:none;">
           <span style="font-size:22px;">📅</span>
           <span class="cell-label">Gantt Chart</span>
         </a>
-        <a class="home-cell" href="javascript:void(0)" onclick="showPage(\'page-warehouse\')" style="text-decoration:none;">
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-warehouse')" style="text-decoration:none;">
           <span style="font-size:22px;">🏭</span>
           <span class="cell-label">Warehouse</span>
         </a>
-        <a class="home-cell" href="javascript:void(0)" onclick="showPage(\'page-t1\')" style="text-decoration:none;">
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-t1')" style="text-decoration:none;">
           <span style="font-size:22px;">🎒</span>
           <span class="cell-label">Items to Carry</span>
         </a>
-        <a class="home-cell" href="javascript:void(0)" onclick="showPage(\'page-dday\')" style="text-decoration:none;">
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-dday')" style="text-decoration:none;">
           <span style="font-size:22px;">📍</span>
           <span class="cell-label">D-Day Tasks</span>
         </a>
-        <a class="home-cell" href="javascript:void(0)" onclick="showPage(\'page-aftersales\')" style="text-decoration:none;">
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-aftersales')" style="text-decoration:none;">
           <span style="font-size:22px;">📊</span>
           <span class="cell-label">After Sales</span>
         </a>
@@ -1223,6 +1222,7 @@ body {
         📸 Timestamp selfie: <span class="ts-value">Log manually in group</span>
       </div> -->
     </div>
+    </div>
 
     <!-- Task Steps -->
     <div class="card">
@@ -1331,6 +1331,7 @@ body {
 
   <!-- ════════════════════════ AFTER SALES ════════════════════════ -->
   <div class="page" id="page-aftersales">
+
     <div class="card">
       <div class="card-title">7. Sales Report</div>
       <div class="sales-report">
@@ -1452,33 +1453,29 @@ body {
 
 </div>
 
-
-
 <script>
-function showPage(id) {
+function showPage(id, el) {
+  // remove active from all pages
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+  // remove active from all buttons
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  var tabs = document.querySelectorAll('.tab-btn');
-  var pages = ['page-home','page-gantt','page-warehouse','page-t1','page-dday','page-aftersales'];
-  var idx = pages.indexOf(id);
-  if (tabs[idx]) tabs[idx].classList.add('active');
-  window.scrollTo(0,0);
+
+  // add active to selected page
+  const page = document.getElementById(id);
+  if (page) page.classList.add('active');
+
+  // highlight button
+  if (el) el.classList.add('active');
 }
-</script>
+
+// default load
+document.addEventListener("DOMContentLoaded", function () {
+  const firstBtn = document.querySelector('.tab-btn');
+  showPage('page-home', firstBtn);
+});
+</script>   
 
 
-<script>
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  document.getElementById(id).classList.add('active');
-  var pages = ['page-home','page-gantt','page-warehouse','page-t1','page-dday','page-aftersales'];
-  var tabs = document.querySelectorAll('.tab-btn');
-  var idx = pages.indexOf(id);
-  if (tabs[idx]) tabs[idx].classList.add('active');
-  window.scrollTo(0, 0);
-}
-</script>
 </body>
 </html>

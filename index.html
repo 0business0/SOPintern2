@@ -3,12 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Intern Counter 4.0</title>
+  <title>Intern Counter 5.0</title>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-
-
-/* ─── VARIABLES ─── */
 :root {
   --navy: #1a3a6b;
   --blue: #1e4db7;
@@ -24,1458 +21,1062 @@
   --text-mid: #3a5080;
   --green: #27ae60;
   --red: #e74c3c;
-  --border: rgba(255, 255, 255, 0.18);
 }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Barlow', sans-serif; background: var(--bg); min-height: 100vh; color: var(--text-dark); }
+.app { display: flex; flex-direction: column; max-width: 900px; margin: 0 auto; padding: 24px 16px 48px; min-height: 100vh; }
 
-/* ─── RESET ─── */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* ─── BASE ─── */
-body {
-  font-family: 'Barlow', sans-serif;
-  background: var(--bg);
-  min-height: 100vh;
-  color: var(--text-dark);
-}
-
-/* ─── LAYOUT ─── */
-.app {
-  display: flex;
-  flex-direction: column;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 24px 16px 48px;
-  min-height: 100vh;
-}
-
-/* ─── HEADER ─── */
+/* HEADER */
 .header-title {
   background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
-  color: var(--white);
-  text-align: center;
-  padding: 16px 24px;
-  border-radius: 14px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  box-shadow: 0 4px 18px rgba(30, 77, 183, 0.25);
-  margin-bottom: 20px;
+  color: var(--white); text-align: center; padding: 16px 24px; border-radius: 14px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 800;
+  letter-spacing: 1px; text-transform: uppercase;
+  box-shadow: 0 4px 18px rgba(30,77,183,0.25); margin-bottom: 20px;
 }
 
-/* ─── NAV TABS ─── */
-.nav-tabs {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 24px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-}
-
-.nav-tabs::-webkit-scrollbar {
-  height: 4px;
-}
-
-.nav-tabs::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 4px;
-}
-
+/* NAV TABS */
+.nav-tabs { display: flex; gap: 6px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 4px; }
+.nav-tabs::-webkit-scrollbar { height: 4px; }
+.nav-tabs::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
 .tab-btn {
-  flex: 1 0 auto;
-  background: var(--blue);
-  color: var(--white);
-  border: none;
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
-  white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(30, 77, 183, 0.13);
+  flex: 1 0 auto; background: var(--blue); color: var(--white); border: none;
+  border-radius: 10px; padding: 10px 14px; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+  cursor: pointer; transition: background 0.18s, transform 0.12s;
+  box-shadow: 0 2px 8px rgba(30,77,183,0.13); white-space: nowrap;
 }
+.tab-btn:hover { background: var(--blue-light); transform: translateY(-1px); }
+.tab-btn.active { background: var(--navy) !important; box-shadow: 0 4px 14px rgba(26,58,107,0.3); transform: translateY(-2px); }
 
-.tab-btn:hover {
-  background: var(--blue-light);
-  transform: translateY(-1px);
-}
+/* PAGES */
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
 
-.tab-btn.active {
-  background: var(--navy);
-  box-shadow: 0 4px 14px rgba(26, 58, 107, 0.3);
-  transform: translateY(-2px);
-}
+/* CARD */
+.card { background: var(--white); border-radius: 14px; padding: 20px 22px; margin-bottom: 16px; box-shadow: 0 2px 14px rgba(30,77,183,0.08); }
+.card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--bg); }
 
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ─── SECTION CARD ─── */
-.card {
-  background: var(--white);
-  border-radius: 14px;
-  padding: 20px 22px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 14px rgba(30, 77, 183, 0.08);
-}
-
-.card-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--navy);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 14px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--bg);
-}
-
-/* ─── HOME PAGE ─── */
-.home-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
+/* HOME GRID */
+.home-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
 .home-cell {
   background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
-  border-radius: 10px;
-  padding: 18px 12px 14px;
-  color: var(--white);
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-  box-shadow: 0 3px 12px rgba(30, 77, 183, 0.18);
-  min-height: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+  border-radius: 10px; padding: 18px 12px 14px; color: var(--white); text-align: center;
+  cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 3px 12px rgba(30,77,183,0.18); min-height: 80px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
 }
-
-.home-cell:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 22px rgba(30, 77, 183, 0.28);
-}
-
-.home-cell.header-cell {
-  background: var(--navy);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  min-height: 44px;
-  padding: 10px 8px;
-  cursor: default;
-}
-
-.home-cell.header-cell:hover {
-  transform: none;
-}
-
-.home-cell .cell-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  opacity: 0.85;
-}
-
+.home-cell:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(30,77,183,0.28); }
+.home-cell .cell-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; opacity: 0.85; }
 .home-cell input[type="text"] {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  color: var(--white);
-  font-size: 13px;
-  padding: 5px 8px;
-  outline: none;
-  text-align: center;
+  width: 100%; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px; color: var(--white); font-size: 13px; padding: 5px 8px; outline: none; text-align: center;
 }
+.home-cell input[type="text"]::placeholder { color: rgba(255,255,255,0.55); }
 
-.home-cell input[type="text"]::placeholder {
-  color: rgba(255, 255, 255, 0.55);
-}
-
-/* ─── GANTT PAGE ─── */
-.gantt-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.gantt-cell {
-  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
-  border-radius: 10px;
-  padding: 16px 12px;
-  color: var(--white);
-  min-height: 90px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.gantt-cell.hdr {
-  background: var(--navy);
-  min-height: 44px;
-  padding: 10px 12px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.gantt-cell label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  opacity: 0.8;
-}
-
-.gantt-cell input[type="text"],
-.gantt-cell input[type="date"] {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  color: var(--white);
-  font-size: 12px;
-  padding: 5px 8px;
-  outline: none;
-}
-
-.gantt-cell input[type="text"]::placeholder,
-.gantt-cell input[type="date"]::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.gantt-cell input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  opacity: 0.7;
-}
-
-/* ─── CHECKLIST ─── */
-.checklist-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: var(--bg-light);
-  margin-bottom: 8px;
-  transition: background 0.15s;
-}
-
-.checklist-item:hover {
-  background: #d5e5f5;
-}
-
-.checklist-label {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-dark);
-  flex: 1;
-}
-
+/* CHECKLIST */
+.checklist-item { display: flex; align-items: center; gap: 14px; padding: 10px 12px; border-radius: 8px; background: var(--bg-light); margin-bottom: 8px; transition: background 0.15s; }
+.checklist-item:hover { background: #d5e5f5; }
+.checklist-label { font-size: 15px; font-weight: 500; color: var(--text-dark); flex: 1; }
 .yn-select {
-  appearance: none;
-  -webkit-appearance: none;
-  border: 2px solid var(--grey-light);
-  border-radius: 8px;
-  padding: 6px 32px 6px 12px;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: 'Barlow', sans-serif;
-  cursor: pointer;
-  outline: none;
-  background-color: var(--bg-light);
-  color: var(--text-mid);
+  appearance: none; -webkit-appearance: none; border: 2px solid var(--grey-light);
+  border-radius: 8px; padding: 6px 32px 6px 12px; font-size: 13px; font-weight: 700;
+  font-family: 'Barlow', sans-serif; cursor: pointer; outline: none;
+  background-color: var(--bg-light); color: var(--text-mid);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233a5080' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  transition: border-color 0.15s, background-color 0.15s, color 0.15s;
-  min-width: 100px;
+  background-repeat: no-repeat; background-position: right 10px center;
+  transition: border-color 0.15s; min-width: 100px;
 }
-
-.yn-select:focus {
-  border-color: var(--accent);
-}
-
-.yn-select.selected-yes {
-  background-color: #eafaf1;
-  border-color: var(--green);
-  color: var(--green);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2327ae60' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-}
-
-.yn-select.selected-no {
-  background-color: #fdf0ee;
-  border-color: var(--red);
-  color: var(--red);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e74c3c' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-}
-
-/* ─── NUMBER INPUT IN CHECKLIST ─── */
+.yn-select.selected-yes { background-color: #eafaf1; border-color: var(--green); color: var(--green); }
+.yn-select.selected-no  { background-color: #fdf0ee; border-color: var(--red);   color: var(--red); }
 .checklist-item input[type="number"] {
-  width: 80px;
-  border: 1px solid var(--grey-light);
-  border-radius: 6px;
-  padding: 5px 8px;
-  font-size: 14px;
-  font-weight: 700;
-  text-align: center;
-  outline: none;
-  background: var(--bg-light);
-  color: var(--navy);
+  width: 80px; border: 1px solid var(--grey-light); border-radius: 6px;
+  padding: 5px 8px; font-size: 14px; font-weight: 700; text-align: center;
+  outline: none; background: var(--bg-light); color: var(--navy);
 }
 
-/* ─── INSTRUCTION BOX ─── */
-.instruction-box {
-  background: #fff3cd;
-  border-left: 4px solid #f0a500;
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 14px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #7a4f00;
-}
+/* INSTRUCTION BOX */
+.instruction-box { background: #fff8e1; border-left: 4px solid #e6ac00; border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; font-size: 13px; font-weight: 600; color: #7a4f00; }
+.instruction-box p { margin-top: 6px; font-weight: 500; }
 
-/* ─── D-DAY TASKS ─── */
-.task-step {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 12px 14px;
-  border-radius: 10px;
-  background: var(--bg-light);
-  margin-bottom: 10px;
-  transition: background 0.15s;
-}
+/* TASK STEPS */
+.task-step { display: flex; align-items: flex-start; gap: 14px; padding: 12px 14px; border-radius: 10px; background: var(--bg-light); margin-bottom: 10px; transition: background 0.15s; }
+.task-step.done { background: #eafaf1; }
+.step-num { width: 30px; height: 30px; border-radius: 50%; background: var(--blue); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+.task-step.done .step-num { background: var(--green); }
+.step-content { flex: 1; }
+.step-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: var(--text-dark); }
+.step-sub { font-size: 12px; color: var(--text-mid); margin-top: 2px; }
+.step-check { width: 22px; height: 22px; accent-color: var(--blue); cursor: pointer; flex-shrink: 0; margin-top: 4px; }
+.task-step input[type="text"] { width: 100%; border: 1px solid var(--grey-light); border-radius: 6px; padding: 6px 10px; font-size: 13px; outline: none; background: white; color: var(--text-dark); margin-top: 4px; }
 
-.task-step.done {
-  background: #eafaf1;
-}
+/* DUTIES GRID */
+.duties-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 8px; }
+.duty-cell { background: var(--blue); border-radius: 8px; padding: 10px 10px 8px; color: white; }
+.duty-cell label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; opacity: 0.8; display: block; margin-bottom: 4px; }
+.duty-cell input { width: 100%; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); border-radius: 5px; color: white; font-size: 13px; padding: 5px 8px; outline: none; }
+.duty-cell input::placeholder { color: rgba(255,255,255,0.5); }
 
-.step-num {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--blue);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800;
-  font-size: 14px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
+/* SALES REPORT */
+.sales-report { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.report-field label { display: block; font-size: 12px; font-weight: 600; color: var(--text-mid); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+.report-field input { width: 100%; border: 1px solid var(--grey-light); border-radius: 7px; padding: 8px 12px; font-size: 14px; color: var(--text-dark); outline: none; background: var(--bg-light); font-family: 'Barlow', sans-serif; }
+.report-field input:focus { border-color: var(--accent); background: white; }
 
-.task-step.done .step-num {
-  background: var(--green);
-}
+/* BUTTONS */
+.btn { background: var(--blue); color: white; border: none; border-radius: 8px; padding: 9px 16px; font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.15s; white-space: nowrap; font-family: 'Barlow', sans-serif; }
+.btn:hover { background: var(--navy); }
+.btn.green { background: var(--green); }
+.btn.green:hover { background: #1e8449; }
+.link-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
 
-.step-content {
-  flex: 1;
-}
+/* SAVE BAR */
+.save-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--white); border-radius: 12px; padding: 14px 18px; margin-bottom: 16px; box-shadow: 0 2px 14px rgba(30,77,183,0.08); flex-wrap: wrap; }
+.save-bar-label { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.5px; flex: 1; }
+.save-btn { background: var(--green); color: white; border: none; border-radius: 9px; padding: 10px 22px; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; transition: background 0.15s, transform 0.12s; display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+.save-btn:hover { background: #1e8449; transform: translateY(-1px); }
+.save-btn:disabled { background: var(--grey); cursor: not-allowed; transform: none; }
+.save-status { font-size: 13px; font-weight: 600; min-width: 140px; text-align: right; }
+.save-status.ok { color: var(--green); }
+.save-status.err { color: var(--red); }
+.save-status.saving { color: var(--text-mid); }
 
-.step-title {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 4px;
-  color: var(--text-dark);
-}
+/* LOGIN OVERLAY */
+#login-overlay { position: fixed; inset: 0; background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); display: flex; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
+#login-overlay.hidden { display: none; }
+.login-box { background: white; border-radius: 20px; padding: 36px 32px 32px; max-width: 420px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.login-logo { text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; color: var(--navy); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.login-sub { text-align: center; font-size: 13px; color: var(--text-mid); margin-bottom: 24px; }
+.login-field { margin-bottom: 14px; }
+.login-field label { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-mid); margin-bottom: 6px; }
+.login-field input { width: 100%; border: 2px solid var(--grey-light); border-radius: 10px; padding: 11px 14px; font-size: 15px; font-family: 'Barlow', sans-serif; color: var(--text-dark); outline: none; transition: border-color 0.15s; }
+.login-field input:focus { border-color: var(--blue); }
+.login-btn { width: 100%; background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); color: white; border: none; border-radius: 10px; padding: 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; margin-top: 8px; transition: opacity 0.15s, transform 0.12s; }
+.login-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.login-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.login-err { text-align: center; font-size: 13px; color: var(--red); margin-top: 10px; min-height: 18px; font-weight: 600; }
+.login-status { text-align: center; font-size: 13px; color: var(--text-mid); margin-top: 8px; min-height: 18px; }
 
-.step-sub {
-  font-size: 12px;
-  color: var(--text-mid);
-  margin-top: 2px;
-}
+/* SESSION BAR */
+#session-bar { background: var(--navy); color: white; border-radius: 12px; padding: 10px 18px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 0.4px; }
+#session-bar .session-id { font-weight: 700; font-size: 15px; color: #90caf9; }
+#logout-btn { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 7px; padding: 5px 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.4px; transition: background 0.15s; }
+#logout-btn:hover { background: rgba(255,255,255,0.25); }
 
-.step-check {
-  width: 22px;
-  height: 22px;
-  accent-color: var(--blue);
-  cursor: pointer;
-  flex-shrink: 0;
-  margin-top: 4px;
-}
+/* GANTT */
+.gantt-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.gantt-cell { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%); border-radius: 10px; padding: 16px 12px; color: var(--white); min-height: 90px; display: flex; flex-direction: column; gap: 8px; }
+.gantt-cell label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; opacity: 0.8; }
+.gantt-cell input[type="text"], .gantt-cell input[type="date"] { width: 100%; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; color: var(--white); font-size: 12px; padding: 5px 8px; outline: none; }
+.gantt-cell input::placeholder { color: rgba(255,255,255,0.5); }
+.gantt-cell input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.7; }
 
-/* ─── DUTIES GRID ─── */
-.duties-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 8px;
-}
+/* TOAST NOTIFICATION */
+#toast-container { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 99999; display: flex; flex-direction: column; align-items: center; gap: 8px; pointer-events: none; }
+.toast { background: var(--navy); color: white; border-radius: 10px; padding: 12px 22px; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.4px; box-shadow: 0 6px 24px rgba(0,0,0,0.3); opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s; max-width: 340px; text-align: center; }
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast.toast-ok { background: #1a5c35; border-left: 4px solid var(--green); }
+.toast.toast-warn { background: #7a4f00; border-left: 4px solid #e6ac00; }
+.toast.toast-err { background: #7a1a1a; border-left: 4px solid var(--red); }
 
-.duty-cell {
-  background: var(--blue);
-  border-radius: 8px;
-  padding: 10px 10px 8px;
-  color: white;
-}
+/* PAGE DOTS */
+.page-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
+.dot { width: 36px; height: 10px; border-radius: 5px; background: var(--grey-light); transition: background 0.2s, width 0.2s; }
+.dot.active { background: var(--blue); width: 52px; }
 
-.duty-cell label {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  opacity: 0.8;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.duty-cell input {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 5px;
-  color: white;
-  font-size: 13px;
-  padding: 5px 8px;
-  outline: none;
-}
-
-.duty-cell input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* ─── STOCK COUNT ─── */
-.stock-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.stock-input-wrap {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--bg-light);
-  padding: 8px 12px;
-  border-radius: 8px;
-}
-
-.stock-input-wrap label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-mid);
-}
-
-.stock-input-wrap input {
-  width: 60px;
-  border: 1px solid var(--grey-light);
-  border-radius: 6px;
-  padding: 5px 8px;
-  font-size: 14px;
-  font-weight: 700;
-  text-align: center;
-  outline: none;
-  color: var(--navy);
-}
-
-.stock-hint {
-  font-size: 11px;
-  color: var(--text-mid);
-  margin-top: 6px;
-  font-style: italic;
-}
-
-.stock-sections {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.stock-section-title {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-mid);
-  margin-bottom: 6px;
-  text-transform: uppercase;
-}
-
-.stock-plus {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--blue);
-}
-
-/* ─── GROUP LINK ─── */
-.link-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-}
-
-.link-row input {
-  flex: 1;
-  border: 1px solid var(--grey-light);
-  border-radius: 8px;
-  padding: 9px 12px;
-  font-size: 14px;
-  outline: none;
-  color: var(--text-dark);
-  min-width: 160px;
-}
-
-/* ─── BUTTONS ─── */
-.btn {
-  background: var(--blue);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 9px 16px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s;
-  white-space: nowrap;
-  font-family: 'Barlow', sans-serif;
-}
-
-.btn:hover {
-  background: var(--navy);
-}
-
-.btn.green {
-  background: var(--green);
-}
-
-.btn.green:hover {
-  background: #1e8449;
-}
-
-/* ─── TIMESTAMP DISPLAY ─── */
-.timestamp-display {
-  background: var(--bg-light);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 13px;
-  color: var(--text-mid);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.ts-value {
-  font-weight: 700;
-  color: var(--navy);
-}
-
-/* ─── AFTER SALES ─── */
-.sales-report {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.report-field label {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-mid);
-  margin-bottom: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
-
-.report-field input {
-  width: 100%;
-  border: 1px solid var(--grey-light);
-  border-radius: 7px;
-  padding: 8px 12px;
-  font-size: 14px;
-  color: var(--text-dark);
-  outline: none;
-  background: var(--bg-light);
-  font-family: 'Barlow', sans-serif;
-}
-
-.report-field input:focus {
-  border-color: var(--accent);
-  background: white;
-}
-
-/* ─── PAGE DOTS ─── */
-.page-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 28px;
-}
-
-.dot {
-  width: 36px;
-  height: 10px;
-  border-radius: 5px;
-  background: var(--grey-light);
-  transition: background 0.2s, width 0.2s;
-  cursor: pointer;
-}
-
-.dot.active {
-  background: var(--blue);
-  width: 52px;
-}
-
-/* ─── UTILITY ─── */
-.mt-4 { margin-top: 4px; }
-.mt-10 { margin-top: 10px; }
-.mb-10 { margin-bottom: 10px; }
-.mb-6 { margin-bottom: 6px; }
-.text-blue { color: var(--blue); }
-
-/* ─── RESPONSIVE — Tablet ─── */
+/* RESPONSIVE */
 @media (max-width: 700px) {
-  .app {
-    padding: 16px 12px 40px;
-  }
-
-  .header-title {
-    font-size: 20px;
-    padding: 14px 16px;
-  }
-
-  .home-grid,
-  .gantt-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .sales-report {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .duties-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .tab-btn {
-    font-size: 11px;
-    padding: 8px 10px;
-  }
+  .home-grid, .gantt-grid { grid-template-columns: repeat(2,1fr); }
+  .sales-report { grid-template-columns: 1fr 1fr; }
 }
-
-/* ─── RESPONSIVE — Mobile ─── */
 @media (max-width: 480px) {
-  .app {
-    padding: 12px 10px 32px;
-  }
-
-  .header-title {
-    font-size: 17px;
-    padding: 12px 12px;
-    border-radius: 10px;
-    letter-spacing: 0.5px;
-  }
-
-  .nav-tabs {
-    gap: 4px;
-    margin-bottom: 16px;
-  }
-
-  .tab-btn {
-    font-size: 10px;
-    padding: 7px 8px;
-    border-radius: 8px;
-  }
-
-  .card {
-    padding: 14px 14px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-  }
-
-  .card-title {
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-
-  /* Home & Gantt: full single column on mobile */
-  .home-grid,
-  .gantt-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  .home-cell {
-    min-height: 70px;
-    padding: 12px 8px 10px;
-    font-size: 10px;
-  }
-
-  .home-cell .cell-label {
-    font-size: 10px;
-  }
-
-  .home-cell input[type="text"] {
-    font-size: 11px;
-    padding: 4px 6px;
-  }
-
-  .gantt-cell {
-    padding: 10px 8px;
-    gap: 6px;
-    font-size: 11px;
-  }
-
-  .gantt-cell.hdr {
-    font-size: 10px;
-    min-height: 38px;
-    padding: 8px;
-  }
-
-  .gantt-cell input[type="text"],
-  .gantt-cell input[type="date"] {
-    font-size: 11px;
-    padding: 4px 6px;
-  }
-
-  /* Duties: 1 column on very small screens */
-  .duties-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  /* Sales report: 1 column */
-  .sales-report {
-    grid-template-columns: 1fr;
-  }
-
-  .checklist-label {
-    font-size: 13px;
-  }
-
-  .yn-select {
-    font-size: 12px;
-    padding: 5px 28px 5px 10px;
-    min-width: 80px;
-  }
-
-  .checklist-item {
-    padding: 8px 10px;
-    gap: 10px;
-  }
-
-  .link-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .link-row input {
-    min-width: unset;
-    width: 100%;
-  }
-
-  .btn {
-    width: 100%;
-    text-align: center;
-    padding: 10px 12px;
-  }
-
-  .stock-sections {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .stock-row {
-    gap: 8px;
-  }
-
-  .stock-input-wrap {
-    flex: 1;
-    justify-content: center;
-  }
-
-  .task-step {
-    padding: 10px 10px;
-    gap: 10px;
-  }
-
-  .step-title {
-    font-size: 13px;
-  }
-
-  .step-sub {
-    font-size: 11px;
-  }
-
-  .page-dots {
-    margin-top: 20px;
-  }
-
-  .dot {
-    width: 28px;
-    height: 8px;
-  }
-
-  .dot.active {
-    width: 42px;
-  }
+  .header-title { font-size: 17px; padding: 12px; }
+  .tab-btn { font-size: 10px; padding: 7px 8px; }
+  .home-grid, .gantt-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .duties-grid { grid-template-columns: 1fr; }
+  .sales-report { grid-template-columns: 1fr; }
 }
-
-
-
-/* ─── PAGES ─── */
-.page { display: none; }
-.page.active { display: block; animation: fadeIn 0.25s ease; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.tab-btn.active {
-  background: var(--navy);
-  box-shadow: 0 4px 14px rgba(26,58,107,0.3);
-  transform: translateY(-2px);
-}
-
-  
-/* ─── PAGES ─── */
-.page { display: none; }
-.page.active { display: block; animation: fadeIn 0.25s ease; }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.tab-btn.active {
-  background: var(--navy) !important;
-  box-shadow: 0 4px 14px rgba(26,58,107,0.3);
-  transform: translateY(-2px);
-}
-</style>
+  </style>
 </head>
 <body>
 
-
+<!-- ════════════ LOGIN OVERLAY ════════════ -->
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="login-logo">Intern Counter 5.0</div>
+    <div class="login-sub">Enter your unique School ID to begin</div>
+    <div class="login-field">
+      <label>School ID</label>
+      <input type="text" id="login-schoolid" placeholder="e.g. KUMCBSE2022-01-28" autocomplete="off" />
+    </div>
+    <button class="login-btn" id="login-btn" onclick="doLogin()">Start →</button>
+    <div class="login-err" id="login-err"></div>
+    <div class="login-status" id="login-status"></div>
+  </div>
+</div>
 
 <div class="app">
 
-  <!-- HEADER -->
-  <div class="header-title">Intern Counter 4.0</div>
-
-  <!-- NAV TABS (CSS-only tab switching using :target) -->
-  <div class="nav-tabs">
-    <button class="tab-btn" onclick="showPage('page-home', this)">Home</button>
-<button class="tab-btn" onclick="showPage('page-gantt', this)">Gantt Chart</button>
-<button class="tab-btn" onclick="showPage('page-warehouse', this)">Warehouse</button>
-<button class="tab-btn" onclick="showPage('page-t1', this)">Items to Carry</button>
-<button class="tab-btn" onclick="showPage('page-dday', this)">D-Day</button>
-<button class="tab-btn" onclick="showPage('page-aftersales', this)">After Sales</button>
+  <!-- SESSION BAR -->
+  <div id="session-bar" style="display:none;">
+    <div>
+      <span style="opacity:0.7;">Session: </span>
+      <span class="session-id" id="session-label"></span>
+    </div>
+    <button id="logout-btn" onclick="doLogout()">← Logout</button>
   </div>
 
-  <!-- ════════════════════════ HOME ════════════════════════ -->
+  <div class="header-title">Intern Counter 5.0</div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showPage('page-home',this)">Home</button>
+    <button class="tab-btn" onclick="showPage('page-gantt',this)">Gantt Chart</button>
+    <button class="tab-btn" onclick="showPage('page-warehouse',this)">Warehouse</button>
+    <button class="tab-btn" onclick="showPage('page-t1',this)">Items to Carry</button>
+    <button class="tab-btn" onclick="showPage('page-dday',this)">D-Day</button>
+    <button class="tab-btn" onclick="showPage('page-aftersales',this)">After Sales</button>
+  </div>
+
+  <!-- ══════════════ HOME ══════════════ -->
   <div class="page active" id="page-home">
+    <div class="save-bar">
+      <span class="save-bar-label">🏠 Home — Counter Details</span>
+      <span class="save-status" id="status-home"></span>
+      <button class="save-btn" onclick="savePage('Home','home')">💾 Save Now</button>
+    </div>
     <div class="card">
       <div class="card-title">Counter Details</div>
       <div class="home-grid">
-        <!-- Header row -->
-        <!-- <div class="home-cell header-cell">A/C Manager Name</div>
-        <div class="home-cell header-cell">Counter Name</div>
-        <div class="home-cell header-cell">School Code</div> -->
-
-
         <div class="home-cell" style="background:var(--blue-mid);">
           <div class="cell-label">A/C Manager Name</div>
-          <input type="text" placeholder="Enter name…" />
+          <input type="text" id="home-acmanager" placeholder="Enter name…" />
         </div>
         <div class="home-cell" style="background:var(--blue-mid);">
           <div class="cell-label">Counter Name</div>
-          <input type="text" placeholder="Enter counter…" />
+          <input type="text" id="home-countername" placeholder="Enter counter…" />
         </div>
         <div class="home-cell" style="background:var(--blue-mid);">
-          <div class="cell-label">School Code</div>
-          <input type="text" placeholder="SCH-001" />
+          <div class="cell-label">School ID</div>
+          <input type="text" id="home-schoolid" placeholder="KUMCBSE2022-01-28" readonly style="opacity:0.8;cursor:default;" />
         </div>
-
-
-        <!-- Input row 2 -->
-        <!-- <div class="home-cell" style="background:var(--blue-mid);">
-          <div class="cell-label">Name</div>
-          <input type="text" placeholder="Enter name…" />
-        </div>
-        <div class="home-cell" style="background:var(--blue-mid);">
-          <div class="cell-label">Counter</div>
-          <input type="text" placeholder="Enter counter…" />
-        </div>
-        <div class="home-cell" style="background:var(--blue-mid);">
-          <div class="cell-label">Code</div>
-          <input type="text" placeholder="SCH-001" />
-        </div> -->
-        <!-- Input Row 3 -->
         <div class="home-cell" style="background:var(--blue);">
           <div class="cell-label">Emailer Link</div>
-          <input type="text" placeholder="Paste link…" />
+          <input type="text" id="home-emailer" placeholder="Paste link…" />
         </div>
         <div class="home-cell" style="background:var(--blue);">
           <div class="cell-label">Venue Location</div>
-          <input type="text" placeholder="Location…" />
+          <input type="text" id="home-venue" placeholder="Location…" />
         </div>
         <div class="home-cell" style="background:var(--blue);">
           <div class="cell-label">Counter Timing</div>
-          <input type="text" placeholder="9AM – 5PM" />
+          <input type="text" id="home-timing" placeholder="9AM – 5PM" />
         </div>
       </div>
     </div>
-
-    <!-- Quick Nav -->
     <div class="card">
       <div class="card-title">Quick Navigation</div>
       <div class="home-grid">
-        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-gantt')" style="text-decoration:none;">
-          <span style="font-size:22px;">📅</span>
-          <span class="cell-label">Gantt Chart</span>
-        </a>
-        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-warehouse')" style="text-decoration:none;">
-          <span style="font-size:22px;">🏭</span>
-          <span class="cell-label">Warehouse</span>
-        </a>
-        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-t1')" style="text-decoration:none;">
-          <span style="font-size:22px;">🎒</span>
-          <span class="cell-label">Items to Carry</span>
-        </a>
-        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-dday')" style="text-decoration:none;">
-          <span style="font-size:22px;">📍</span>
-          <span class="cell-label">D-Day Tasks</span>
-        </a>
-        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-aftersales')" style="text-decoration:none;">
-          <span style="font-size:22px;">📊</span>
-          <span class="cell-label">After Sales</span>
-        </a>
-        <div class="home-cell" style="background:#1a5276;cursor:default;">
-          <span style="font-size:22px;">✅</span>
-          <span class="cell-label">View Report</span>
-        </div>
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-gantt')" style="text-decoration:none;"><span style="font-size:22px;">📅</span><span class="cell-label">Gantt Chart</span></a>
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-warehouse')" style="text-decoration:none;"><span style="font-size:22px;">🏭</span><span class="cell-label">Warehouse</span></a>
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-t1')" style="text-decoration:none;"><span style="font-size:22px;">🎒</span><span class="cell-label">Items to Carry</span></a>
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-dday')" style="text-decoration:none;"><span style="font-size:22px;">📍</span><span class="cell-label">D-Day Tasks</span></a>
+        <a class="home-cell" href="javascript:void(0)" onclick="showPage('page-aftersales')" style="text-decoration:none;"><span style="font-size:22px;">📊</span><span class="cell-label">After Sales</span></a>
+        <div class="home-cell" style="background:#1a5276;cursor:default;"><span style="font-size:22px;">✅</span><span class="cell-label">T-2 / T-1</span></div>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════ GANTT CHART ════════════════════════ -->
+  <!-- ══════════════ GANTT CHART ══════════════ -->
   <div class="page" id="page-gantt">
+    <div class="save-bar">
+      <span class="save-bar-label">📅 Gantt Chart</span>
+      <span class="save-status" id="status-gantt"></span>
+      <span style="font-size:12px;color:var(--text-mid);font-style:italic;">Read-only — loaded from master sheet</span>
+    </div>
     <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+        <span style="font-size:13px;font-weight:600;color:var(--text-mid);">Select School ID:</span>
+        <select id="ganttSchoolDropdown" style="flex:1;min-width:180px;border:2px solid var(--grey-light);border-radius:8px;padding:8px 12px;font-size:14px;font-family:'Barlow',sans-serif;color:var(--text-dark);outline:none;background:var(--bg-light);cursor:pointer;">
+          <option value="">⏳ Loading…</option>
+        </select>
+        <span id="ganttLoadStatus" style="font-size:12px;color:var(--text-mid);font-style:italic;"></span>
+      </div>
+    </div>
+    <div class="card" id="ganttDataCard" style="display:none;">
       <div class="card-title">Gantt Chart Details</div>
       <div class="gantt-grid">
-        <!-- Row 1 headers -->
-        <!-- <div class="gantt-cell hdr">Product Details</div>
-        <div class="gantt-cell hdr">Contact Details of School POC</div>
-        <div class="gantt-cell hdr">Account Manager Number</div> -->
-        <!-- Row 1 data -->
-        <div class="gantt-cell">
-          <label>Product Details</label>
-          <input type="text" placeholder="e.g. School Kit A" />
-          <label>SKU</label>
-          <input type="text" placeholder="SKU-0001" />
+        <div class="gantt-cell"><label>Account Manager</label><input type="text" id="g-am" readonly style="opacity:0.85;cursor:default;" /></div>
+        <div class="gantt-cell"><label>Applicable Products</label><input type="text" id="g-products" readonly style="opacity:0.85;cursor:default;" /></div>
+        <div class="gantt-cell"><label>School POC &amp; Contact</label><input type="text" id="g-poc" readonly style="opacity:0.85;cursor:default;" /></div>
+        <div class="gantt-cell"><label>Counter Date</label><input type="text" id="g-date" readonly style="opacity:0.85;cursor:default;" /></div>
+        <div class="gantt-cell"><label>Counter Timings</label><input type="text" id="g-timings" readonly style="opacity:0.85;cursor:default;" /></div>
+        <div class="gantt-cell"><label>Advance Orders Delivery</label><input type="text" id="g-delivery" readonly style="opacity:0.85;cursor:default;" /></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+        <div style="background:var(--bg-light);border-radius:10px;padding:14px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-mid);margin-bottom:6px;">Counter Venue</div>
+          <div id="g-venueText" style="font-size:13px;color:var(--text-dark);margin-bottom:8px;word-break:break-all;"></div>
+          <a id="g-venueLink" href="#" target="_blank" style="display:none;background:var(--blue);color:white;text-decoration:none;border-radius:7px;padding:6px 14px;font-size:12px;font-weight:700;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;">📍 Open Location</a>
         </div>
-        <div class="gantt-cell">
-          <label>School POC Contact</label>
-          <input type="text" placeholder="Contact person" />
-          <label>Phone</label>
-          <input type="text" placeholder="+91 XXXXX XXXXX" />
-        </div>
-        <div class="gantt-cell">
-          <label>A/C Manager</label>
-          <input type="text" placeholder="Manager name" />
-          <label>Number</label>
-          <input type="text" placeholder="+91 XXXXX XXXXX" />
-        </div>
-        <!-- Row 2 headers -->
-        <!-- <div class="gantt-cell hdr">Emailer Link</div>
-        <div class="gantt-cell hdr">Venue Location</div>
-        <div class="gantt-cell hdr">School Code</div> -->
-        <!-- Row 2 data -->
-        <div class="gantt-cell">
-          <label>Emailer Link</label>
-          <input type="text" placeholder="https://..." />
-        </div>
-        <div class="gantt-cell">
-          <label>Counter Address</label>
-          <input type="text" placeholder="School address" />
-        </div>
-        <div class="gantt-cell">
-          <label>School Code</label>
-          <input type="text" placeholder="SCH-001" />
-        </div>
-        <!-- Row 3 headers -->
-        <!-- <div class="gantt-cell hdr">Counter Timing</div>
-        <div class="gantt-cell hdr">Important Dates</div>
-        <div class="gantt-cell hdr">Delivery Timeline</div> -->
-        <!-- Row 3 data -->
-        <div class="gantt-cell">
-          <label>Opening Time</label>
-          <input type="text" placeholder="9:00 AM" />
-          <label>Closing Time</label>
-          <input type="text" placeholder="5:00 PM" />
-        </div>
-        <div class="gantt-cell">
-          <label>Important Dates</label>
-          <input type="date" />
-          <!-- <label>D-Day Date</label>
-          <input type="date" /> -->
-        </div>
-        <div class="gantt-cell">
-          <label>Delivery Timeline</label>
-          <input type="text" />
-          <!-- <label>Expected Delivery</label>
-          <input type="date" /> -->
+        <div style="background:var(--bg-light);border-radius:10px;padding:14px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-mid);margin-bottom:6px;">Emailer</div>
+          <div id="g-emailerText" style="font-size:13px;color:var(--text-dark);margin-bottom:8px;word-break:break-all;"></div>
+          <a id="g-emailerLink" href="#" target="_blank" style="display:none;background:var(--blue);color:white;text-decoration:none;border-radius:7px;padding:6px 14px;font-size:12px;font-weight:700;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;">📄 Open PDF</a>
         </div>
       </div>
     </div>
+    <div class="card" id="ganttEmptyState" style="text-align:center;padding:32px 20px;color:var(--text-mid);">
+      <div style="font-size:36px;margin-bottom:10px;">📅</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;">Select a School ID above to load Gantt data</div>
+    </div>
   </div>
 
-  <!-- ════════════════════════ WAREHOUSE ════════════════════════ -->
+  <!-- PapaParse -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+  <script>
+  (function () {
+    const GANTT_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkBlOPp6Smf4xOK0js8LBbqs6f5NQqy7I-lXynuo6KPwxm0Y8kAx6P4i45fUx8nH2jp8JgbcabAo-t/pub?gid=1643964805&single=true&output=csv";
+    let ganttData = [];
+    function cleanURL(u) { return u ? u.replace(/"/g,'').trim() : ''; }
+    function fillGanttData(index) {
+      const row = ganttData[index];
+      // Sheet columns: [0]=SCHOOL_ID, [1]=School Code, [2]=Account Manager,
+      // [3]=Applicable Products, [4]=Counter Venue, [5]=School POC & Contact,
+      // [6]=Counter Date, [7]=Counter Timings, [8]=Advance Orders Delivery, [9]=Emailer
+      document.getElementById('g-am').value       = row[2]||'';
+      document.getElementById('g-products').value = row[3]||'';
+      document.getElementById('g-poc').value       = row[5]||'';
+      document.getElementById('g-date').value      = row[6]||'';
+      document.getElementById('g-timings').value   = row[7]||'';
+      document.getElementById('g-delivery').value  = row[8]||'';
+      const venueURL = cleanURL(row[4]);
+      document.getElementById('g-venueText').textContent = row[4]||'—';
+      const vLink = document.getElementById('g-venueLink');
+      if (venueURL.startsWith('http')) { vLink.href=venueURL; vLink.style.display='inline-block'; } else { vLink.style.display='none'; }
+      const emailerURL = cleanURL(row[9]);
+      document.getElementById('g-emailerText').textContent = row[9]||'—';
+      const eLink = document.getElementById('g-emailerLink');
+      if (emailerURL.startsWith('http')) { eLink.href=emailerURL; eLink.style.display='inline-block'; } else { eLink.style.display='none'; }
+      document.getElementById('ganttDataCard').style.display='block';
+      document.getElementById('ganttEmptyState').style.display='none';
+    }
+    function initGanttSheet() {
+      const statusEl = document.getElementById('ganttLoadStatus');
+      const dropdown = document.getElementById('ganttSchoolDropdown');
+      statusEl.textContent = 'Loading data…';
+      Papa.parse(GANTT_CSV_URL, {
+        download: true, header: false, skipEmptyLines: true,
+        complete: function(results) {
+          ganttData = results.data.slice(1);
+          dropdown.innerHTML = '<option value="">— Select School ID —</option>';
+          ganttData.forEach(function(row, idx) {
+            const code = row[0];
+            if (code && code.trim()!=='') {
+              const opt = document.createElement('option');
+              opt.value = idx; opt.textContent = code;
+              dropdown.appendChild(opt);
+            }
+          });
+          statusEl.textContent = ganttData.length + ' schools loaded ✓';
+          setTimeout(function(){ statusEl.textContent=''; }, 3000);
+        },
+        error: function() { statusEl.textContent = '⚠️ Could not load sheet'; }
+      });
+      dropdown.addEventListener('change', function() {
+        if (this.value!=='') { fillGanttData(this.value); }
+        else { document.getElementById('ganttDataCard').style.display='none'; document.getElementById('ganttEmptyState').style.display='block'; }
+      });
+    }
+    if (document.readyState==='loading') { document.addEventListener('DOMContentLoaded', initGanttSheet); } else { initGanttSheet(); }
+  })();
+  </script>
+
+  <!-- ══════════════ WAREHOUSE ══════════════ -->
   <div class="page" id="page-warehouse">
+    <div class="save-bar">
+      <span class="save-bar-label">🏭 Warehouse Checklist</span>
+      <span class="save-status" id="status-warehouse"></span>
+      <button class="save-btn" onclick="savePage('Warehouse','warehouse')">💾 Save Now</button>
+    </div>
     <div class="card">
       <div class="card-title">Warehouse Checklist</div>
       <div class="instruction-box">
-        ⚠️ IMPORTANT: Check with the DC (invoice). If qty mismatch — report to <strong>JAGAN</strong> immediately.
+        <strong>⚠️ IMPORTANT:</strong>
+        <p>1. Check with DC (invoice). If qty mismatch — report to JAGAN immediately.</p>
+        <p>2. Carry bag, sizing scale, and standee should be delivered along with stock to the counter.</p>
+        <p>3. Before moving stock to school, the business manager must clarify DATE, TIME, and ROOM availability with LOCK &amp; KEY.</p>
       </div>
-
-      <div class="checklist-item">
-        <span class="checklist-label">Packaging Slip</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Number of Boxes</span>
-        <input type="number" placeholder="0" min="0" />
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Sizing Scale</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Carry Bag</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Size &amp; Color Wise Qty</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Standee</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
+      <div class="checklist-item"><span class="checklist-label">Projection Sheet</span><select class="yn-select" id="wh-projection"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Size &amp; Color Wise Qty</span><input type="number" id="wh-sizeqty" placeholder="0" min="0" /></div>
+      <div class="checklist-item"><span class="checklist-label">Number of Boxes</span><input type="number" id="wh-boxes" placeholder="0" min="0" /></div>
+      <div class="checklist-item"><span class="checklist-label">Packaging Slip</span><select class="yn-select" id="wh-packslip"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Carry Bag</span><select class="yn-select" id="wh-carrybag"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Standee</span><select class="yn-select" id="wh-standee"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
     </div>
   </div>
 
-  <!-- ════════════════════════ T-1 ITEMS TO CARRY ════════════════════════ -->
+  <!-- ══════════════ ITEMS TO CARRY ══════════════ -->
   <div class="page" id="page-t1">
+    <div class="save-bar">
+      <span class="save-bar-label">🎒 Items to Carry</span>
+      <span class="save-status" id="status-t1"></span>
+      <button class="save-btn" onclick="savePage('Items to Carry','t1')">💾 Save Now</button>
+    </div>
     <div class="card">
       <div class="card-title">Items to Carry — Checklist</div>
-
-      <div class="checklist-item">
-        <span class="checklist-label">Order Form</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
+      <div class="instruction-box">
+        <strong>📝 Notes:</strong>
+        <p>1. After logging in to school ID in POS, check product details with E-Mailer. If any discrepancy, talk to Sajan sir.</p>
+        <p>2. Know your location with Bijay Sir or Account Manager.</p>
+        <p>3. How to travel to the school — follow Bijay Sir's instructions.</p>
+        <p>4. Team meeting must be done before the day. Any doubt — clarify with Bijay sir.</p>
+        <p>5. Collect the temp staff information.</p>
       </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Attendance Sheet</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Marker</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Tape</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Cutter</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Stapler</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">A4 Pages</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">POS Machine with Charger</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Emailer Color Printout</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">POS Rolls</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Billbook &amp; Carbon Paper</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
+      <div class="checklist-item"><span class="checklist-label">E-Mailer Color Printout</span><select class="yn-select" id="t1-emailer"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Order Form</span><select class="yn-select" id="t1-orderform"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Attendance Sheet</span><select class="yn-select" id="t1-attendance"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Marker</span><select class="yn-select" id="t1-marker"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Tape</span><select class="yn-select" id="t1-tape"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Cutter</span><select class="yn-select" id="t1-cutter"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Stapler</span><select class="yn-select" id="t1-stapler"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">A4 Pages</span><select class="yn-select" id="t1-a4"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">POS Machine with Charger</span><select class="yn-select" id="t1-pos"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">POS Rolls</span><select class="yn-select" id="t1-posrolls"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Manual Billbook &amp; Carbon Paper</span><select class="yn-select" id="t1-billbook"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
     </div>
   </div>
 
-  <!-- ════════════════════════ D-DAY ════════════════════════ -->
+  <!-- ══════════════ D-DAY ══════════════ -->
   <div class="page" id="page-dday">
-
-    <!-- Group Link -->
+    <div class="save-bar">
+      <span class="save-bar-label">📍 D-Day Tasks</span>
+      <span class="save-status" id="status-dday"></span>
+      <button class="save-btn" onclick="savePage('D-Day','dday')">💾 Save Now</button>
+    </div>
     <div class="card">
       <div class="card-title">🔗 Share Your Location</div>
       <div class="link-row">
-        <!-- <input type="text" id="group-link" placeholder="Paste group link here…" /> -->
-        
-      <a class="btn green" href="https://wa.me" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;margin-top:4px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.057 23.428a.75.75 0 0 0 .921.921l5.569-1.475A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.694 9.694 0 0 1-4.945-1.355l-.355-.212-3.668.971.979-3.58-.231-.368A9.713 9.713 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-        Location and Queries 
-      </a>
-      <!-- <div class="timestamp-display" style="margin-top:10px;">
-        📸 Timestamp selfie: <span class="ts-value">Log manually in group</span>
-      </div> -->
+        <a class="btn green" href="https://wa.me" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.057 23.428a.75.75 0 0 0 .921.921l5.569-1.475A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.694 9.694 0 0 1-4.945-1.355l-.355-.212-3.668.971.979-3.58-.231-.368A9.713 9.713 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+          Location and Queries
+        </a>
+      </div>
     </div>
-    </div>
-
-    <!-- Task Steps -->
     <div class="card">
       <div class="card-title">D-Day Task Steps</div>
+      <div class="instruction-box">
+        <strong>📝 Notes:</strong>
+        <p>1. Plan &amp; Reach before reporting time!</p>
+        <p>2. Payment APP Activate, Settle Batch. In APP market go to my app — update any pending apps.</p>
+        <p>3. Get and wear LOTTO T-shirt and BIBS for Temp Staff.</p>
+        <p>4. Account Manager is the 1st POC for Management regarding any query.</p>
+        <p>5. In case of Advance order, ORDER ADDRESS to be captured with PINCODE in the ORDER FORM as well as in the POS Machine.</p>
+        <p>6. The order form should be kept separate. Do not mix with NORMAL ORDER.</p>
+      </div>
 
       <div class="task-step" id="step-1">
         <div class="step-num">1</div>
-        <div class="step-content">
-          <div class="step-title">Share Live Location</div>
-          <div class="step-sub">Share via group link</div>
-        </div>
-        <input type="checkbox" class="step-check" />
+        <div class="step-content"><div class="step-title">Share Live Location</div><div class="step-sub">Share via group link</div></div>
+        <input type="checkbox" class="step-check" id="dd-step1" />
       </div>
-
       <div class="task-step" id="step-2">
         <div class="step-num">2</div>
-        <div class="step-content">
-          <div class="step-title">Update on Reaching School</div>
-          <div class="step-sub">Timestamp + selfie in group</div>
-        </div>
-        <input type="checkbox" class="step-check" />
+        <div class="step-content"><div class="step-title">Update on Reaching School</div><div class="step-sub">Timestamp + selfie in group</div></div>
+        <input type="checkbox" class="step-check" id="dd-step2" />
       </div>
-
       <div class="task-step" id="step-3">
         <div class="step-num">3</div>
-        <div class="step-content">
-          <div class="step-title">Count &amp; Update Opening Stock</div>
-          <div class="step-sub">Use 9+12 style counting</div>
-        </div>
-        <input type="text" placeholder="Type openinig Stock" />
+        <div class="step-content"><div class="step-title">Count &amp; Update Opening Stock</div><div class="step-sub">Use 9+12 style counting</div></div>
+        <input type="text" id="dd-openstock" placeholder="Type opening stock…" />
       </div>
-
       <div class="task-step" id="step-4">
         <div class="step-num">4</div>
-        <div class="step-content">
-          <div class="step-title">Test POS Machine</div>
-          <div class="step-sub">Use "TEST" order to verify</div>
-        </div>
-        <input type="checkbox" class="step-check" />
+        <div class="step-content"><div class="step-title">Fill the Attendance Form</div><div class="step-sub">Fill with time and signature</div></div>
+        <input type="checkbox" class="step-check" id="dd-step4" />
       </div>
-
       <div class="task-step" id="step-5">
         <div class="step-num">5</div>
-        <div class="step-content">
-          <div class="step-title">Segregate Duties</div>
-          <div class="step-sub">Assign: Sizing / Billing / Delivery</div>
-        </div>
-        <input type="checkbox" class="step-check" />
+        <div class="step-content"><div class="step-title">Test POS Machine</div><div class="step-sub">Use "TEST" order to verify</div></div>
+        <input type="checkbox" class="step-check" id="dd-step5" />
       </div>
-
       <div class="task-step" id="step-6">
         <div class="step-num">6</div>
-        <div class="step-content">
-          <div class="step-title">Count &amp; Update Closing Stock</div>
-          <div class="step-sub">Use 9+12 style counting</div>
-        </div>
-        <input type="text" placeholder="Type Closing Stock" />
+        <div class="step-content"><div class="step-title">Send Counter Photo</div><div class="step-sub">Click picture of counter &amp; send to WhatsApp group</div></div>
+        <input type="checkbox" class="step-check" id="dd-step6" />
       </div>
-
       <div class="task-step" id="step-7">
         <div class="step-num">7</div>
-        <div class="step-content">
-          <div class="step-title">Return to Office &amp; Prepare Sales Report</div>
-          <div class="step-sub">Submit report before leaving</div>
-        </div>
-        <input type="checkbox" class="step-check" />
+        <div class="step-content"><div class="step-title">Count &amp; Update Closing Stock</div><div class="step-sub">Use 9+12 style counting</div></div>
+        <input type="text" id="dd-closestock" placeholder="Type closing stock…" />
+      </div>
+      <div class="task-step" id="step-8">
+        <div class="step-num">8</div>
+        <div class="step-content"><div class="step-title">Return to Office &amp; Prepare Sales Report</div><div class="step-sub">Submit report before leaving</div></div>
+        <input type="checkbox" class="step-check" id="dd-step8" />
       </div>
     </div>
 
-    <!-- Segregate Duties -->
     <div class="card">
-      <div class="card-title">5. Segregate Duties</div>
+      <div class="card-title">Segregate Duties</div>
       <div class="duties-grid">
-        <div class="duty-cell">
-          <label>Sizing</label>
-          <input type="text" placeholder="Name…" />
-        </div>
-        <div class="duty-cell">
-          <label>Billing</label>
-          <input type="text" placeholder="Name…" />
-        </div>
-        <div class="duty-cell">
-          <label>Delivery</label>
-          <input type="text" placeholder="Name…" />
-        </div>
+        <div class="duty-cell"><label>Sizing</label><input type="text" id="dd-sizing" placeholder="Name…" /></div>
+        <div class="duty-cell"><label>Billing</label><input type="text" id="dd-billing" placeholder="Name…" /></div>
+        <div class="duty-cell"><label>Delivery</label><input type="text" id="dd-delivery" placeholder="Name…" /></div>
       </div>
     </div>
-
-    <!-- Stock Count -->
-    <!-- <div class="card">
-      <div class="card-title">3 &amp; 6. Stock Count</div>
-      <div class="sales-report" style="margin-bottom:0;">
-        <div class="report-field">
-          <label>Opening Stock (units)</label>
-          <input type="number" placeholder="0" min="0" />
-        </div>
-        <div class="report-field">
-          <label>Closing Stock (units)</label>
-          <input type="number" placeholder="0" min="0" />
-        </div>
-      </div>
-    </div> -->
-
-
   </div>
 
-  <!-- ════════════════════════ AFTER SALES ════════════════════════ -->
+  <!-- ══════════════ AFTER SALES ══════════════ -->
   <div class="page" id="page-aftersales">
-
+    <div class="save-bar">
+      <span class="save-bar-label">📊 After Sales</span>
+      <span class="save-status" id="status-aftersales"></span>
+      <button class="save-btn" onclick="savePage('After Sales','aftersales')">💾 Save Now</button>
+    </div>
     <div class="card">
-      <div class="card-title">7. Sales Report</div>
+      <div class="card-title">Sales Report</div>
+      <div class="instruction-box">📝 <strong>Notes:</strong> Submit the sales report before leaving. Send to Account Manager and update stationery stock.</div>
       <div class="sales-report">
-        <div class="report-field">
-          <label>Counter Name</label>
-          <input type="text" placeholder="Counter name" />
-        </div>
-        <div class="report-field">
-          <label>Date</label>
-          <input type="date" />
-        </div>
-        <div class="report-field">
-          <label>Opening Stock</label>
-          <input type="number" placeholder="0" />
-        </div>
-        <div class="report-field">
-          <label>Closing Stock</label>
-          <input type="number" placeholder="0" />
-        </div>
-        <div class="report-field">
-          <label>Units Sold</label>
-          <input type="number" placeholder="0" />
-        </div>
-        <div class="report-field">
-          <label>Total Revenue (₹)</label>
-          <input type="number" placeholder="0" />
-        </div>
-        <div class="report-field">
-          <label>A/C Manager</label>
-          <input type="text" placeholder="Name" />
-        </div>
-        <div class="report-field">
-          <label>Prepared By</label>
-          <input type="text" placeholder="Intern name" />
-        </div>
+        <div class="report-field"><label>Counter Name</label><input type="text" id="as-countername" placeholder="Counter name" /></div>
+        <div class="report-field"><label>Date</label><input type="date" id="as-date" /></div>
+        <div class="report-field"><label>Opening Stock</label><input type="number" id="as-opening" placeholder="0" /></div>
+        <div class="report-field"><label>Closing Stock</label><input type="number" id="as-closing" placeholder="0" /></div>
+        <div class="report-field"><label>Units Sold</label><input type="number" id="as-sold" placeholder="0" /></div>
+        <div class="report-field"><label>Total Revenue (₹)</label><input type="number" id="as-revenue" placeholder="0" /></div>
+        <div class="report-field"><label>A/C Manager</label><input type="text" id="as-acmanager" placeholder="Name" /></div>
+        <div class="report-field"><label>Prepared By</label><input type="text" id="as-preparedby" placeholder="Intern name" /></div>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-title">8. Stationary Update</div>
-      <div class="instruction-box">⚠️ Update stationary status after returning to office.</div>
-
-      <div class="checklist-item">
-        <span class="checklist-label">Order Form</span>
-        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Attendance Sheet</span>
-        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Marker</span>
-        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Tape</span>
-        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Cutter</span>
-        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Stapler</span>
-        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">A4 Pages</span>
-        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">POS Rolls</span>
-        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Billbook</span>
-        <input type="number" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" />
-      </div>
+      <div class="card-title">Stationery Update</div>
+      <div class="instruction-box">⚠️ Update stationery status after returning to office.</div>
+      <div class="checklist-item"><span class="checklist-label">Order Form</span><input type="number" id="as-st-orderform" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" /></div>
+      <div class="checklist-item"><span class="checklist-label">Attendance Sheet</span><input type="number" id="as-st-attendance" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" /></div>
+      <div class="checklist-item"><span class="checklist-label">Marker</span><input type="number" id="as-st-marker" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" /></div>
+      <div class="checklist-item"><span class="checklist-label">Tape</span><input type="number" id="as-st-tape" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" /></div>
+      <div class="checklist-item"><span class="checklist-label">Cutter</span><input type="number" id="as-st-cutter" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" /></div>
+      <div class="checklist-item"><span class="checklist-label">Stapler</span><input type="number" id="as-st-stapler" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" /></div>
+      <div class="checklist-item"><span class="checklist-label">A4 Pages</span><input type="number" id="as-st-a4" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" /></div>
+      <div class="checklist-item"><span class="checklist-label">POS Rolls</span><input type="number" id="as-st-posrolls" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" /></div>
+      <div class="checklist-item"><span class="checklist-label">Billbook</span><input type="number" id="as-st-billbook" placeholder="Qty left" min="0" style="width:90px;border:1px solid var(--grey-light);border-radius:6px;padding:6px 8px;font-size:14px;font-weight:700;text-align:center;outline:none;background:var(--bg-light);color:var(--navy);" /></div>
     </div>
-
     <div class="card">
       <div class="card-title">Return Checklist</div>
-      <div class="checklist-item">
-        <span class="checklist-label">Returned to office</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Sales report prepared &amp; submitted</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-label">Stationary updated</span>
-        <select class="yn-select">
-          <option value="">— Select —</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
+      <div class="checklist-item"><span class="checklist-label">Returned to office</span><select class="yn-select" id="as-returned"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Sales report prepared &amp; submitted</span><select class="yn-select" id="as-reported"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+      <div class="checklist-item"><span class="checklist-label">Stationery updated</span><select class="yn-select" id="as-stationery"><option value="">— Select —</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
     </div>
   </div>
 
-  <!-- Page Dots (decorative only, no JS) -->
   <div class="page-dots">
-    <div class="dot active"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
+    <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
   </div>
 
-</div>
+</div><!-- /app -->
+
+<div id="toast-container"></div>
 
 <script>
-function showPage(id, el) {
-  // remove active from all pages
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+// ════════════════════════════════════════════════════════════
+//  CONFIGURATION — paste your deployed Apps Script URL here
+// ════════════════════════════════════════════════════════════
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby9qTvRkvPJln7pN5O8ogZ_SP7PJ-h8d6BDb-IObSueqADuaDl_7xkaAnF_VKidJaqT/exec';
 
-  // remove active from all buttons
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+// ════════════════════════════════════════════════════════════
+//  SESSION
+// ════════════════════════════════════════════════════════════
+let SESSION = { schoolId: '' };
 
-  // add active to selected page
-  const page = document.getElementById(id);
-  if (page) page.classList.add('active');
+// ════════════════════════════════════════════════════════════
+//  LOGIN
+// ════════════════════════════════════════════════════════════
+async function doLogin() {
+  const idVal  = document.getElementById('login-schoolid').value.trim();
+  const errEl  = document.getElementById('login-err');
+  const statEl = document.getElementById('login-status');
+  const btn    = document.getElementById('login-btn');
 
-  // highlight button
-  if (el) el.classList.add('active');
+  errEl.textContent = '';
+  if (!idVal) { errEl.textContent = 'Please enter your School ID.'; return; }
+
+  SESSION.schoolId = idVal;
+
+  btn.disabled = true;
+  statEl.textContent = '⏳ Connecting to server…';
+
+  let loadedData = null;
+  let loadMessage = '';
+
+  // Load existing data via POST
+  if (SCRIPT_URL && SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        statEl.textContent = '⏳ Loading saved data' + (attempt > 1 ? ` (attempt ${attempt})…` : '…');
+        const res = await fetch(SCRIPT_URL, {
+          method:  'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body:    JSON.stringify({ action: 'load', schoolId: idVal }),
+          redirect: 'follow'
+        });
+        const text = await res.text();
+
+        if (text.trim() === 'OK' || text.trim() === '') {
+          if (attempt < 3) { await new Promise(r => setTimeout(r, 800)); continue; }
+          loadMessage = '⚠️ Server returned unexpected response — check SCRIPT_URL.';
+          break;
+        }
+
+        let json;
+        try { json = JSON.parse(text); }
+        catch(e) {
+          if (attempt < 3) { await new Promise(r => setTimeout(r, 800)); continue; }
+          loadMessage = '⚠️ Could not parse server response: ' + text.substring(0, 60);
+          break;
+        }
+
+        if (json && json.data && Object.keys(json.data).length > 0) {
+          loadedData = json.data;
+          loadMessage = '✅ Previous data loaded!';
+        } else {
+          loadMessage = '✨ New school ID — fill and save each page.';
+        }
+        break;
+
+      } catch(e) {
+        if (attempt < 3) { await new Promise(r => setTimeout(r, 800)); continue; }
+        loadMessage = '⚠️ Could not load data: ' + e.message;
+      }
+    }
+  } else {
+    loadMessage = '⚠️ SCRIPT_URL not set in the HTML file.';
+  }
+
+  if (loadedData) restoreAllData(loadedData);
+
+  statEl.textContent = loadMessage;
+  await new Promise(r => setTimeout(r, 900));
+
+  document.getElementById('login-overlay').classList.add('hidden');
+  document.getElementById('session-bar').style.display = 'flex';
+  document.getElementById('session-label').textContent = 'School ID: ' + SESSION.schoolId;
+  document.getElementById('home-schoolid').value = SESSION.schoolId;
+
+  showToast(loadMessage);
+  btn.disabled = false;
 }
 
-// default load
-document.addEventListener("DOMContentLoaded", function () {
-  const firstBtn = document.querySelector('.tab-btn');
-  showPage('page-home', firstBtn);
+// Enter key on login fields
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('login-schoolid').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+  wireSelectColors();
+  wireCheckboxes();
+  showPage('page-home', document.querySelector('.tab-btn'));
 });
-</script>   
 
+// ════════════════════════════════════════════════════════════
+//  LOGOUT
+// ════════════════════════════════════════════════════════════
+function doLogout() {
+  SESSION = { schoolId: '' };
+  document.getElementById('login-schoolid').value = '';
+  document.getElementById('login-err').textContent = '';
+  document.getElementById('login-status').textContent = '';
+  document.getElementById('login-btn').disabled = false;
+  document.getElementById('login-overlay').classList.remove('hidden');
+  document.getElementById('session-bar').style.display = 'none';
+  clearAllFields();
+}
 
+function clearAllFields() {
+  document.querySelectorAll('.page input, .page select').forEach(el => {
+    if (el.type === 'checkbox') el.checked = false;
+    else el.value = '';
+    if (el.classList.contains('yn-select')) el.classList.remove('selected-yes','selected-no');
+  });
+  document.querySelectorAll('.task-step').forEach(s => s.classList.remove('done'));
+  document.querySelectorAll('.save-status').forEach(s => { s.textContent=''; s.className='save-status'; });
+}
+
+// ════════════════════════════════════════════════════════════
+//  TAB NAVIGATION
+// ════════════════════════════════════════════════════════════
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const page = document.getElementById(id);
+  if (page) page.classList.add('active');
+  if (el && el.classList) el.classList.add('active');
+}
+
+// ════════════════════════════════════════════════════════════
+//  COLLECT DATA — each page returns a flat {column: value} object
+// ════════════════════════════════════════════════════════════
+function collectData(pageKey) {
+  const d = {
+    'School ID':   SESSION.schoolId,
+    'Last Saved':  new Date().toLocaleString('en-IN')
+  };
+
+  if (pageKey === 'Home') {
+    d['A/C Manager Name'] = v('home-acmanager');
+    d['Counter Name']     = v('home-countername');
+    d['Emailer Link']     = v('home-emailer');
+    d['Venue Location']   = v('home-venue');
+    d['Counter Timing']   = v('home-timing');
+  }
+
+  if (pageKey === 'Warehouse') {
+    d['Projection Sheet']      = v('wh-projection');
+    d['Size & Color Wise Qty'] = v('wh-sizeqty');
+    d['Number of Boxes']       = v('wh-boxes');
+    d['Packaging Slip']        = v('wh-packslip');
+    d['Carry Bag']             = v('wh-carrybag');
+    d['Standee']               = v('wh-standee');
+  }
+
+  if (pageKey === 'Items to Carry') {
+    d['E-Mailer Color Printout']      = v('t1-emailer');
+    d['Order Form']                   = v('t1-orderform');
+    d['Attendance Sheet']             = v('t1-attendance');
+    d['Marker']                       = v('t1-marker');
+    d['Tape']                         = v('t1-tape');
+    d['Cutter']                       = v('t1-cutter');
+    d['Stapler']                      = v('t1-stapler');
+    d['A4 Pages']                     = v('t1-a4');
+    d['POS Machine with Charger']     = v('t1-pos');
+    d['POS Rolls']                    = v('t1-posrolls');
+    d['Manual Billbook & Carbon Paper'] = v('t1-billbook');
+  }
+
+  if (pageKey === 'D-Day') {
+    d['Step 1 - Share Live Location']       = cb('dd-step1');
+    d['Step 2 - Update on Reaching School'] = cb('dd-step2');
+    d['Opening Stock']                      = v('dd-openstock');
+    d['Step 4 - Fill Attendance Form']      = cb('dd-step4');
+    d['Step 5 - Test POS Machine']          = cb('dd-step5');
+    d['Step 6 - Send Counter Photo']        = cb('dd-step6');
+    d['Closing Stock']                      = v('dd-closestock');
+    d['Step 8 - Return to Office']          = cb('dd-step8');
+    d['Duty - Sizing']                      = v('dd-sizing');
+    d['Duty - Billing']                     = v('dd-billing');
+    d['Duty - Delivery']                    = v('dd-delivery');
+  }
+
+  if (pageKey === 'After Sales') {
+    d['Counter Name']             = v('as-countername');
+    d['Date']                     = v('as-date');
+    d['Opening Stock']            = v('as-opening');
+    d['Closing Stock']            = v('as-closing');
+    d['Units Sold']               = v('as-sold');
+    d['Total Revenue']            = v('as-revenue');
+    d['A/C Manager']              = v('as-acmanager');
+    d['Prepared By']              = v('as-preparedby');
+    d['Stat - Order Form']        = v('as-st-orderform');
+    d['Stat - Attendance Sheet']  = v('as-st-attendance');
+    d['Stat - Marker']            = v('as-st-marker');
+    d['Stat - Tape']              = v('as-st-tape');
+    d['Stat - Cutter']            = v('as-st-cutter');
+    d['Stat - Stapler']           = v('as-st-stapler');
+    d['Stat - A4 Pages']          = v('as-st-a4');
+    d['Stat - POS Rolls']         = v('as-st-posrolls');
+    d['Stat - Billbook']          = v('as-st-billbook');
+    d['Returned to Office']                    = v('as-returned');
+    d['Sales Report Submitted']                = v('as-reported');
+    d['Stationery Updated']                    = v('as-stationery');
+  }
+
+  return d;
+}
+
+function v(id) { const el = document.getElementById(id); return el ? el.value : ''; }
+function cb(id) { const el = document.getElementById(id); return el && el.checked ? 'Yes' : 'No'; }
+
+// ════════════════════════════════════════════════════════════
+//  RESTORE DATA — fill fields from loaded sheet data
+// ════════════════════════════════════════════════════════════
+function restoreAllData(allData) {
+  // allData = { 'Home': {col:val,...}, 'Warehouse': {...}, ... }
+
+  function set(id, val) { const el=document.getElementById(id); if(el && val!==undefined) el.value=val; }
+  function setcb(id, val) { const el=document.getElementById(id); if(el) { el.checked=(val==='Yes'); el.closest('.task-step')?.classList.toggle('done', el.checked); } }
+  function setsel(id, val) {
+    const el=document.getElementById(id);
+    if(!el||val===undefined) return;
+    el.value=val;
+    el.classList.remove('selected-yes','selected-no');
+    if(val==='Yes') el.classList.add('selected-yes');
+    if(val==='No')  el.classList.add('selected-no');
+  }
+
+  const H = allData['Home'] || {};
+  set('home-acmanager',  H['A/C Manager Name']);
+  set('home-countername',H['Counter Name']);
+  set('home-emailer',    H['Emailer Link']);
+  set('home-venue',      H['Venue Location']);
+  set('home-timing',     H['Counter Timing']);
+  // home-schoolid is always set from SESSION after login, not from sheet data
+
+  const W = allData['Warehouse'] || {};
+  setsel('wh-projection', W['Projection Sheet']);
+  set('wh-sizeqty',  W['Size & Color Wise Qty']);
+  set('wh-boxes',    W['Number of Boxes']);
+  setsel('wh-packslip', W['Packaging Slip']);
+  setsel('wh-carrybag', W['Carry Bag']);
+  setsel('wh-standee',  W['Standee']);
+
+  const T = allData['Items to Carry'] || {};
+  setsel('t1-emailer',   T['E-Mailer Color Printout']);
+  setsel('t1-orderform', T['Order Form']);
+  setsel('t1-attendance',T['Attendance Sheet']);
+  setsel('t1-marker',    T['Marker']);
+  setsel('t1-tape',      T['Tape']);
+  setsel('t1-cutter',    T['Cutter']);
+  setsel('t1-stapler',   T['Stapler']);
+  setsel('t1-a4',        T['A4 Pages']);
+  setsel('t1-pos',       T['POS Machine with Charger']);
+  setsel('t1-posrolls',  T['POS Rolls']);
+  setsel('t1-billbook',  T['Manual Billbook & Carbon Paper']);
+
+  const D = allData['D-Day'] || {};
+  setcb('dd-step1',    D['Step 1 - Share Live Location']);
+  setcb('dd-step2',    D['Step 2 - Update on Reaching School']);
+  set('dd-openstock',  D['Opening Stock']);
+  setcb('dd-step4',    D['Step 4 - Fill Attendance Form']);
+  setcb('dd-step5',    D['Step 5 - Test POS Machine']);
+  setcb('dd-step6',    D['Step 6 - Send Counter Photo']);
+  set('dd-closestock', D['Closing Stock']);
+  setcb('dd-step8',    D['Step 8 - Return to Office']);
+  set('dd-sizing',     D['Duty - Sizing']);
+  set('dd-billing',    D['Duty - Billing']);
+  set('dd-delivery',   D['Duty - Delivery']);
+
+  const A = allData['After Sales'] || {};
+  set('as-countername',   A['Counter Name']);
+  set('as-date',          A['Date']);
+  set('as-opening',       A['Opening Stock']);
+  set('as-closing',       A['Closing Stock']);
+  set('as-sold',          A['Units Sold']);
+  set('as-revenue',       A['Total Revenue']);
+  set('as-acmanager',     A['A/C Manager']);
+  set('as-preparedby',    A['Prepared By']);
+  set('as-st-orderform',  A['Stat - Order Form']);
+  set('as-st-attendance', A['Stat - Attendance Sheet']);
+  set('as-st-marker',     A['Stat - Marker']);
+  set('as-st-tape',       A['Stat - Tape']);
+  set('as-st-cutter',     A['Stat - Cutter']);
+  set('as-st-stapler',    A['Stat - Stapler']);
+  set('as-st-a4',         A['Stat - A4 Pages']);
+  set('as-st-posrolls',   A['Stat - POS Rolls']);
+  set('as-st-billbook',   A['Stat - Billbook']);
+  setsel('as-returned',   A['Returned to Office']);
+  setsel('as-reported',   A['Sales Report Submitted']);
+  setsel('as-stationery', A['Stationery Updated']);
+}
+
+// ════════════════════════════════════════════════════════════
+//  SAVE — POST to Apps Script, targeting a specific sheet tab
+// ════════════════════════════════════════════════════════════
+function setStatus(pageId, msg, type) {
+  const el = document.getElementById('status-' + pageId);
+  if (!el) return;
+  el.textContent = msg;
+  el.className = 'save-status ' + type;
+}
+
+async function savePage(sheetName, pageId) {
+  if (!SESSION.schoolId) { setStatus(pageId,'⚠️ Please log in first','err'); return; }
+  if (!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+    setStatus(pageId,'⚠️ Set SCRIPT_URL in the HTML','err'); return;
+  }
+
+  const data = collectData(sheetName);
+  const payload = {
+    action:    'upsert',
+    sheetName: sheetName,
+    schoolId:  SESSION.schoolId,
+    data:      data
+  };
+
+  setStatus(pageId,'⏳ Saving…','saving');
+  try {
+    const res  = await fetch(SCRIPT_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body:    JSON.stringify(payload)
+    });
+    const text = await res.text();
+    if (res.ok && text.trim() === 'OK') {
+      setStatus(pageId, '✅ Saved ' + new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'}), 'ok');
+    } else {
+      setStatus(pageId, '❌ ' + text.substring(0,80), 'err');
+    }
+  } catch(err) {
+    setStatus(pageId, '❌ ' + err.message, 'err');
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+//  TOAST — show a brief notification at bottom of screen
+// ════════════════════════════════════════════════════════════
+function showToast(msg, duration = 4000) {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  if (msg.startsWith('✅')) toast.classList.add('toast-ok');
+  else if (msg.startsWith('⚠️')) toast.classList.add('toast-warn');
+  else if (msg.startsWith('❌')) toast.classList.add('toast-err');
+  toast.textContent = msg;
+  container.appendChild(toast);
+  requestAnimationFrame(() => { requestAnimationFrame(() => { toast.classList.add('show'); }); });
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400);
+  }, duration);
+}
+
+// ════════════════════════════════════════════════════════════
+//  UI WIRING — select colors + checkbox step highlighting
+// ════════════════════════════════════════════════════════════
+function wireSelectColors() {
+  document.querySelectorAll('select.yn-select').forEach(sel => {
+    sel.addEventListener('change', function() {
+      this.classList.remove('selected-yes','selected-no');
+      if (this.value==='Yes') this.classList.add('selected-yes');
+      if (this.value==='No')  this.classList.add('selected-no');
+    });
+  });
+}
+function wireCheckboxes() {
+  document.querySelectorAll('input[type="checkbox"].step-check').forEach(cb => {
+    cb.addEventListener('change', function() {
+      this.closest('.task-step')?.classList.toggle('done', this.checked);
+    });
+  });
+}
+</script>
+
+<!--
+╔══════════════════════════════════════════════════════════════════════╗
+║           GOOGLE APPS SCRIPT — FRESH COMPLETE CODE                  ║
+║  1. Go to script.google.com → New project                           ║
+║  2. Delete everything and paste ALL the code below                  ║
+║  3. Deploy → New deployment → Web app                               ║
+║     • Execute as: Me                                                ║
+║     • Who has access: Anyone                                        ║
+║  4. Copy the Web App URL                                            ║
+║  5. Paste it as SCRIPT_URL at the top of this HTML file             ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+// ── Sheet tab names — must match exactly ─────────────────────────────
+const SHEET_TABS = ['Home', 'Warehouse', 'Items to Carry', 'D-Day', 'After Sales'];
+
+// ── GET: simple health check ──────────────────────────────
+function doGet(e) {
+  // NOTE: Return JSON so it's distinguishable from a POST load response
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'ready' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// ── POST: handles both 'load' and 'upsert' actions ───────────────────
+function doPost(e) {
+  try {
+    const payload = JSON.parse(e.postData.contents);
+    if (payload.action === 'load') return handleLoad(payload);
+    if (payload.action === 'upsert') return handleUpsert(payload);
+    return out('ERROR: Unknown action');
+  } catch(err) {
+    return out('ERROR: ' + err.message);
+  }
+}
+
+// ── LOAD: return all saved data for a school ID across all tabs ─────
+function handleLoad(payload) {
+  const schoolId = String(payload.schoolId).trim();
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const result = {};
+
+  SHEET_TABS.forEach(tabName => {
+    const sheet = ss.getSheetByName(tabName);
+    if (!sheet || sheet.getLastRow() < 2) return;
+
+    const data = sheet.getDataRange().getValues();
+    const headers = data[0].map(String);
+    const idCol = headers.indexOf('School ID');
+    if (idCol === -1) return;
+
+    for (let i = 1; i < data.length; i++) {
+      if (String(data[i][idCol]).trim() === schoolId) {
+        const row = {};
+        headers.forEach((h, j) => { row[h] = data[i][j]; });
+        result[tabName] = row;
+        break;
+      }
+    }
+  });
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ data: Object.keys(result).length ? result : null }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// ── UPSERT: save/update one row in the correct tab ───────────────────
+function handleUpsert(payload) {
+  const ss       = SpreadsheetApp.getActiveSpreadsheet();
+  const tabName  = payload.sheetName;
+  const schoolId = String(payload.schoolId).trim();
+  const rowData  = payload.data;
+
+  // Create the tab if it doesn't exist yet
+  let sheet = ss.getSheetByName(tabName);
+  if (!sheet) sheet = ss.insertSheet(tabName);
+
+  // Get or build header row
+  let headers = sheet.getLastColumn() > 0
+    ? sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(String)
+    : [];
+
+  // Add any missing columns
+  Object.keys(rowData).forEach(col => {
+    if (!headers.includes(col)) {
+      sheet.getRange(1, headers.length + 1).setValue(col);
+      headers.push(col);
+    }
+  });
+
+  // Refresh headers
+  if (sheet.getLastColumn() > 0) {
+    headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(String);
+  }
+
+  // Find existing row by School ID, or append new
+  const allData = sheet.getDataRange().getValues();
+  const idCol = headers.indexOf('School ID');
+  let rowIndex = -1;
+  if (idCol !== -1) {
+    for (let i = 1; i < allData.length; i++) {
+      if (String(allData[i][idCol]).trim() === schoolId) { rowIndex = i + 1; break; }
+    }
+  }
+  if (rowIndex === -1) rowIndex = (sheet.getLastRow() || 1) + 1;
+
+  // Build and write the row
+  const row = new Array(headers.length).fill('');
+  Object.entries(rowData).forEach(([col, val]) => {
+    const idx = headers.indexOf(col);
+    if (idx !== -1) row[idx] = val;
+  });
+
+  sheet.getRange(rowIndex, 1, 1, row.length).setValues([row]);
+  return out('OK');
+}
+
+function out(text) {
+  return ContentService.createTextOutput(text).setMimeType(ContentService.MimeType.TEXT);
+}
+
+-->
 </body>
 </html>
